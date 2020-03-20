@@ -27,6 +27,7 @@
 import VeBar from '../../src/packages/bar'
 import VeLine from '../../src/packages/line'
 import VeHistogram from '../../src/packages/histogram'
+import YjroiChart from '../../src/packages/yjroi'
 import VePie from '../../src/packages/pie'
 import VeRing from '../../src/packages/ring'
 import VeWaterfall from '../../src/packages/waterfall'
@@ -75,6 +76,7 @@ export default {
     VeBar,
     VeLine,
     VeHistogram,
+    YjroiChart,
     VePie,
     VeRing,
     VeWaterfall,

@@ -1,6 +1,11 @@
 import VeBar from '../bar'
 import VeHistogram from '../histogram'
-// import VeLine from '../line'
+import VeLine from '../line'
+import YjroiChart from '../yjroi'
+import BmllChart from '../bmll'
+import CjzqChart from '../cjzq'
+import LlsjldChart from '../llsjld'
+import barserChart from '../barser'
 // import VePie from '../pie'
 // import VeRing from '../ring'
 // import VeWaterfall from '../waterfall'
@@ -21,8 +26,13 @@ import VeHistogram from '../histogram'
 
 const components = [
   VeBar,
-  VeHistogram
-  // VeLine,
+  VeHistogram,
+  VeLine,
+  YjroiChart,
+  BmllChart,
+  CjzqChart,
+  LlsjldChart,
+  barserChart
   // VePie,
   // VeRing,
   // VeWaterfall,
@@ -56,7 +66,12 @@ export default {
   VeBar,
   VeHistogram,
   // VeRing,
-  // VeLine,
+  VeLine,
+  YjroiChart,
+  BmllChart,
+  CjzqChart,
+  LlsjldChart,
+  barserChart,
   // VePie,
   // VeWaterfall,
   // VeFunnel,
