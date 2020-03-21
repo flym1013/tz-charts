@@ -1,11 +1,11 @@
 {
   "name": "@tzfe/v-charts",
-  "version": "1.19.0",
+  "version": "1.0.0",
   "description": "Vue Echarts Components",
   "main": "lib/index.js",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config ./build/webpack.config.js",
-    "build": "node build/rollup.config.js && cp -f lib/index.min.js lib/style.min.css docs/",
+    "build": "node build/rollup.config.js",
     "buildOnly": "node build/rollup.config.js",
     "prepublishOnly": "npm run build",
     "test": "karma start ./test/karma.conf.js",
