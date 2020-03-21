@@ -11,7 +11,7 @@ function getLineXAxis(args) {
     axisTick: { show: true, lineStyle: { color: "#eee" } },
     data: rows.map(row => row[item]),
     show: axisVisible,
-    //自定义
+    // 自定义
     axisLabel: {
       margin: 10,
       textStyle: {
@@ -76,10 +76,11 @@ function getLineSeries(args) {
       data: dataTemp[item]
     };
 
-    if (area)
+    if (area) {
       seriesItem.areaStyle = {
-        //自定义
+        // 自定义
         normal: {
+          // eslint-disable-next-line no-undef
           color: new echarts.graphic.LinearGradient(
             0,
             0,
@@ -101,6 +102,7 @@ function getLineSeries(args) {
           shadowBlur: 10
         }
       };
+    }
     if (axisSite.right) {
       seriesItem.yAxisIndex = ~axisSite.right.indexOf(item) ? 1 : 0;
     }
@@ -130,12 +132,13 @@ function getLineYAxis(args) {
       show: false
     },
     show: axisVisible,
-    //自定义
+    // 自定义
     axisLine: {
       lineStyle: {
         color: "#fff"
       }
-    }
+    },
+    position: "left"
   };
   let yAxis = [];
   for (let i = 0; i < 2; i++) {
@@ -158,7 +161,7 @@ function getLineYAxis(args) {
     yAxis[i].scale = scale[i] || false;
     yAxis[i].min = min[i] || null;
     yAxis[i].max = max[i] || null;
-    //自定义
+    // 自定义
     yAxis[i].splitLine = {
       lineStyle: {
         type: "dashed",
@@ -179,7 +182,7 @@ function getLineTooltip(args) {
     : rightItems;
   return {
     trigger: "axis",
-    //自定义
+    // 自定义
     extraCssText: "box-shadow:0px 4px 10px 0px rgba(0,52,113,0.1);",
     backgroundColor: "#fff",
     textStyle: {
