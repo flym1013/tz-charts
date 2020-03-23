@@ -222,12 +222,17 @@ function getLineTooltip(args) {
 }
 
 function getLegend(args) {
+  const legend = {
+    top: 5,
+    right: 15
+  };
   const { metrics, legendName, labelMap } = args;
   if (!legendName && !labelMap) return { data: metrics };
   const data = labelMap
     ? metrics.map(item => (labelMap[item] == null ? item : labelMap[item]))
     : metrics;
   return {
+    ...legend,
     data,
     formatter(name) {
       return legendName[name] != null ? legendName[name] : name;
@@ -235,13 +240,20 @@ function getLegend(args) {
   };
 }
 
-const grid = {
-  left: "0px",
-  right: "0px",
-  bottom: "10px",
-  top: "40px",
-  containLabel: true
-};
+function getGrid(args) {
+  const grid = {
+    left: 15,
+    right: 15,
+    bottom: 10,
+    top: 40,
+    containLabel: true
+  };
+
+  return {
+    ...grid,
+    ...args
+  };
+}
 
 export const line = (columns, rows, settings, extra) => {
   rows = isArray(rows) ? rows : [];
@@ -266,7 +278,8 @@ export const line = (columns, rows, settings, extra) => {
     label,
     itemStyle,
     lineStyle,
-    areaStyle
+    areaStyle,
+    grid
   } = settings;
   const { tooltipVisible, legendVisible, tooltipFormatter } = extra;
   let metrics = columns.slice();
@@ -282,6 +295,7 @@ export const line = (columns, rows, settings, extra) => {
   }
 
   const legend = legendVisible && getLegend({ metrics, legendName, labelMap });
+
   const tooltip =
     tooltipVisible &&
     getLineTooltip({
@@ -323,6 +337,7 @@ export const line = (columns, rows, settings, extra) => {
     xAxisType,
     dimension
   });
-  let options = { legend, xAxis, series, yAxis, tooltip, grid };
+  const _grid = getGrid(grid);
+  let options = { legend, xAxis, series, yAxis, tooltip, grid: _grid };
   return options;
 };
