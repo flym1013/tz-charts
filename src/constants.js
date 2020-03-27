@@ -17,8 +17,23 @@ export const DEFAULT_THEME = {
   }
 }
 
+// 默认颜色  小于等于6使用
 export const DEFAULT_COLORS = [
-  '#19d4ae', '#5ab1ef', '#fa6e86',
+  '#709DFF', '#47CF88', '#FED723',
+  '#FF6265', '#8C7EF9', '#687B9B'
+]
+
+// 默认颜色  大于6小于等于10使用
+export const DEFAULT_COLORS_10 = [
+  '#719CFF', '#28D1D1', '#51E7C2',
+  '#45D08A', '#FED725', '#FF9C59',
+  '#FF6165', '#9F95FD', '#3B7FFE',
+  '#667B9F'
+]
+
+// 默认颜色  大于10小于等于20使用
+export const DEFAULT_COLORS_20 = [
+  '#709DFF', '#5ab1ef', '#fa6e86',
   '#ffb980', '#0067a6', '#c4b4e4',
   '#d87a80', '#9cbbff', '#d9d0c7',
   '#87a997', '#d49ea2', '#5b4947',

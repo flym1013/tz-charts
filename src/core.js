@@ -166,6 +166,10 @@ export default {
     },
 
     chartColor() {
+      console.log("表格颜色输出");
+      console.log(
+        this.colors || (this.theme && this.theme.color) || DEFAULT_COLORS
+      );
       return this.colors || (this.theme && this.theme.color) || DEFAULT_COLORS;
     }
   },
@@ -184,8 +188,10 @@ export default {
         _once: this._once
       };
       if (this.beforeConfig) data = this.beforeConfig(data);
-
+      console.log("开始加载配置项");
       let options = this.chartHandler(columns, rows, this.settings, extra);
+      console.log("配置项目");
+      console.log(options);
       if (options) {
         if (typeof options.then === "function") {
           options.then(this.optionsHandler);
@@ -213,6 +219,26 @@ export default {
       this.echarts && this.echarts.resize();
     },
 
+    // 递归合拼数据
+    mergeData(options, setting) {
+      console.log("递归合拼数据");
+      console.log(options);
+      console.log(setting);
+      if (!options) {
+        options = {};
+      }
+      for (let item in setting) {
+        if (setting[item]) {
+          if (setting[item] instanceof Object) {
+            options[item] = this.mergeData(options[item], setting[item]);
+          } else {
+            options[item] = setting[item];
+          }
+        }
+      }
+      return options;
+    },
+
     optionsHandler(options) {
       // legend
       if (this.legendPosition && options.legend) {
@@ -224,9 +250,11 @@ export default {
       }
       // color
       options.color = this.chartColor;
-      // echarts self settings
+      // 遍历用户设置属性，合并数据
       ECHARTS_SETTINGS.forEach(setting => {
-        if (this[setting]) options[setting] = this[setting];
+        if (this[setting]) {
+          options[setting] = this.mergeData(options[setting], this[setting]);
+        }
       });
       // animation
       if (this.animation) setAnimation(options, this.animation);
@@ -275,8 +303,12 @@ export default {
           setOptionOpts = false;
         }
       }
+
       if (this._isDestroyed) return;
       if (this.log) console.log(options);
+      console.log("将参数设置到图表");
+      console.log(options);
+      // 将参数设置到图表
       this.echarts.setOption(options, setOptionOpts);
       this.$emit("ready", this.echarts, options, echartsLib);
       if (!this._once["ready-once"]) {

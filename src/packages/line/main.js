@@ -1,5 +1,10 @@
 import { getFormated, getStackMap } from "../../utils.js";
 import { isArray } from "utils-lite";
+import {
+  DEFAULT_COLORS,
+  DEFAULT_COLORS_10,
+  DEFAULT_COLORS_20
+} from "../../constants.js";
 
 function getLineXAxis(args) {
   const { dimension, rows, xAxisName, axisVisible, xAxisType } = args;
@@ -8,7 +13,11 @@ function getLineXAxis(args) {
     nameLocation: "middle",
     nameGap: 22,
     name: xAxisName[index] || "",
-    axisTick: { show: true, lineStyle: { color: "#eee" } },
+    axisTick: {
+      show: true,
+      alignWithLabel: true,
+      lineStyle: { color: "#E4E7ED" }
+    },
     data: rows.map(row => row[item]),
     show: axisVisible,
     // 自定义
@@ -27,6 +36,19 @@ function getLineXAxis(args) {
   }));
 }
 
+// 获取线的颜色
+function getColor(list, index) {
+  if (list.length <= 6) {
+    return DEFAULT_COLORS[index];
+  } else if (list.length > 6 && list.length <= 10) {
+    return DEFAULT_COLORS_10[index];
+  } else if (list.length > 10 && list.length <= 20) {
+    return DEFAULT_COLORS_20[index];
+  } else {
+    return DEFAULT_COLORS_20[0];
+  }
+}
+
 function getLineSeries(args) {
   const {
     rows,
@@ -37,16 +59,11 @@ function getLineSeries(args) {
     nullAddZero,
     labelMap,
     label,
-    itemStyle = {
-      normal: {
-        color: "rgba(255, 205, 47, 1)",
-        borderColor: "rgba(255, 205, 47, 1)",
-        borderWidth: 3
-      }
-    },
+    itemStyle,
     lineStyle = {
       normal: {
-        width: 1
+        width: 2,
+        type: "solid"
       }
     },
     areaStyle,
@@ -55,6 +72,31 @@ function getLineSeries(args) {
   let series = [];
   const dataTemp = {};
   const stackMap = stack && getStackMap(stack);
+
+  // 构造 itemStyle 数据
+  let itemStyleList = [];
+  if (itemStyle && itemStyle.length === metrics.length) {
+    // 用户设置样式
+    itemStyleList = itemStyle;
+  } else {
+    // 默认线条样式
+    metrics.forEach(item => {
+      let index = metrics.indexOf(item);
+
+      let color = getColor(metrics, index);
+
+      let colorItem = {
+        normal: {
+          color: color,
+          borderColor: color,
+          borderWidth: 3
+        }
+      };
+
+      itemStyleList.push(colorItem);
+    });
+  }
+
   metrics.forEach(item => {
     dataTemp[item] = [];
   });
@@ -108,12 +150,12 @@ function getLineSeries(args) {
     }
 
     if (stack && stackMap[item]) seriesItem.stack = stackMap[item];
-
+    let index = metrics.indexOf(item);
     if (label) seriesItem.label = label;
-    if (itemStyle) seriesItem.itemStyle = itemStyle;
+    if (itemStyleList[index]) seriesItem.itemStyle = itemStyleList[index];
     if (lineStyle) seriesItem.lineStyle = lineStyle;
     if (areaStyle) seriesItem.areaStyle = areaStyle;
-    seriesItem.smooth = true;
+    seriesItem.smooth = false;
     seriesItem.symbol = "circle";
     seriesItem.symbolSize = 1;
     seriesItem.showSymbol = true;
@@ -223,17 +265,26 @@ function getLineTooltip(args) {
 
 function getLegend(args) {
   const legend = {
-    top: 5,
-    right: 15
+    top: 18,
+    right: 20
   };
+  const legendFontStyle = {
+    fontSize: 10,
+    color: "#999999"
+  };
+
   const { metrics, legendName, labelMap } = args;
   if (!legendName && !labelMap) return { data: metrics };
   const data = labelMap
     ? metrics.map(item => (labelMap[item] == null ? item : labelMap[item]))
     : metrics;
   return {
+    itemWidth: 15,
+    itemHeight: 8,
+    itemGap: 14,
     ...legend,
     data,
+    textStyle: legendFontStyle,
     formatter(name) {
       return legendName[name] != null ? legendName[name] : name;
     }
@@ -242,10 +293,10 @@ function getLegend(args) {
 
 function getGrid(args) {
   const grid = {
-    left: 15,
-    right: 15,
-    bottom: 10,
-    top: 40,
+    left: 20,
+    right: 20,
+    bottom: 20,
+    top: 60,
     containLabel: true
   };
 
@@ -295,7 +346,6 @@ export const line = (columns, rows, settings, extra) => {
   }
 
   const legend = legendVisible && getLegend({ metrics, legendName, labelMap });
-
   const tooltip =
     tooltipVisible &&
     getLineTooltip({
@@ -337,7 +387,23 @@ export const line = (columns, rows, settings, extra) => {
     xAxisType,
     dimension
   });
+
+  // 标题
+  const title = {
+    textStyle: {
+      fontSize: 16,
+      fontWeight: 500
+    },
+    padding: [
+      20, // 上
+      10, // 右
+      5, // 下
+      20 // 左
+    ]
+  };
+
+  console.log(series);
   const _grid = getGrid(grid);
-  let options = { legend, xAxis, series, yAxis, tooltip, grid: _grid };
+  let options = { title, legend, xAxis, series, yAxis, tooltip, grid: _grid };
   return options;
 };
