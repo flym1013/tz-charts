@@ -85,9 +85,7 @@ function getLineSeries(args) {
       let color = getColor(metrics, index);
       let colorItem = {
         normal: {
-          color: color,
-          borderColor: color,
-          borderWidth: 5
+          color: color
         }
       };
       itemStyleList.push(colorItem);
@@ -154,7 +152,7 @@ function getLineSeries(args) {
     if (areaStyle) seriesItem.areaStyle = areaStyle;
     seriesItem.smooth = false;
     seriesItem.symbol = "circle";
-    seriesItem.symbolSize = 1;
+    seriesItem.symbolSize = 6;
     seriesItem.showSymbol = true;
     seriesItem.yAxisIndex = 1;
     seriesItem.barGap = "15";
@@ -244,13 +242,15 @@ function getLineTooltip(args) {
       const { name, axisValueLabel } = items[0];
       const title = name || axisValueLabel;
       tpl.push(`${title}<br>`);
-      items.forEach(({ seriesName, data, marker }) => {
+      items.forEach(({ seriesName, data, color }) => {
+        console.log(items);
         let showData = null;
         const type = ~rightList.indexOf(seriesName)
           ? yAxisType[1]
           : yAxisType[0];
         const itemData = isArray(data) ? data[1] : data;
         showData = getFormated(itemData, type, digit);
+        let marker = `<span style="display:inline-block;margin-right:5px;border-radius:6px;width:6px;height:6px;background-color:${color};"></span>`;
         tpl.push(marker);
         tpl.push(`${seriesName}: ${showData}`);
         tpl.push("<br>");
