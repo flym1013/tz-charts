@@ -1,13 +1,8 @@
-// eslint-disable-next-line import/no-duplicates
+import VeBar from "./packages/bar";
 import VeLine from "./packages/line";
-// eslint-disable-next-line import/no-duplicates
-import TzLine from "./packages/line";
-import TzBar from "./packages/bar";
-import TzPie from "./packages/pie";
-import TzRing from "./packages/ring";
-import TzHistogram from "./packages/histogram";
+import YjroiChart from "./packages/yjroi";
 
-const components = [VeLine, TzBar, TzLine];
+const components = [VeBar, VeLine, YjroiChart];
 
 function install(Vue, _) {
   components.forEach(component => {
@@ -15,4 +10,4 @@ function install(Vue, _) {
   });
 }
 
-export { VeLine, TzLine, TzBar, TzPie, TzRing, TzHistogram, install };
+export { VeBar, VeLine, YjroiChart, install };

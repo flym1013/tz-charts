@@ -2,11 +2,10 @@
   <div class="page-item-test">
     <div class="chart-item" v-for="(d, i) in chartData" :key="i">
       <div class="chart-part">
-        <h3>{{ d.name }}</h3>
+        <!-- <h3>{{ d.name }}</h3> -->
         <component
           :is="`ve-${innerType}`"
           :data="d.data"
-          :settings="d.settings"
           :title="{ text: d.name }"
         >
         </component>
@@ -26,11 +25,13 @@
 </template>
 
 <script>
-import VeBar from "../../src/packages/bar";
-import VeLine from "../../src/packages/line";
-import VeHistogram from "../../src/packages/histogram";
-import VePie from "../../src/packages/pie";
-import VeRing from "../../src/packages/ring";
+// import VeBar from "../../src/packages/bar";
+// import { VeLine } from "../../src/index.es";
+import { VeLine } from "../../src/index.es";
+// import VeLine from "../../src/packages/line";
+// import VeHistogram from "../../src/packages/histogram";
+// import VePie from "../../src/packages/pie";
+// import VeRing from "../../src/packages/ring";
 
 // import VeWaterfall from '../../src/packages/waterfall'
 // import VeFunnel from '../../src/packages/funnel'
@@ -53,7 +54,9 @@ export default {
 
   data() {
     return {
-      title: { text: "333332323" },
+      title: { text: "表格测试" },
+      series: [{ itemStyle: { normal: { color: "#00ffff" } } }],
+      performanceTrendscharts: [],
       chartData: [],
       type: null,
       innerType: null
@@ -70,6 +73,29 @@ export default {
 
   created() {
     this.init();
+
+    this.performanceTrendscharts = {
+      columns: ["日期", "访问", "下单", "数据1", "数据2"],
+      rows: [
+        { 日期: "1/1", 访问: 1393, 下单: 1093, 数据1: 3233, 数据2: 333 },
+        { 日期: "1/2", 访问: 3530, 下单: 3230, 数据1: 1233, 数据2: 1233 },
+        { 日期: "1/5", 访问: 3792, 下单: 3492, 数据1: 4233, 数据2: 1243 },
+        { 日期: "1/3", 访问: 2923, 下单: 2623, 数据1: 3233, 数据2: 3333 },
+        { 日期: "1/4", 访问: 1723, 下单: 1423, 数据1: 2233, 数据2: 2833 },
+        { 日期: "1/5", 访问: 3792, 下单: 3492, 数据1: 4233, 数据2: 1243 },
+        { 日期: "1/6", 访问: 3792, 下单: 3492, 数据1: 4233, 数据2: 1243 },
+        { 日期: "1/7", 访问: 4593, 下单: 4293, 数据1: 233, 数据2: 3233 },
+        { 日期: "1/8", 访问: 3792, 下单: 3492, 数据1: 4233, 数据2: 1243 },
+        { 日期: "1/9", 访问: 3792, 下单: 3492, 数据1: 4233, 数据2: 1243 },
+        { 日期: "1/10", 访问: 3792, 下单: 3492, 数据1: 4233, 数据2: 1243 },
+        { 日期: "1/11", 访问: 3792, 下单: 3492, 数据1: 4233, 数据2: 1243 },
+        { 日期: "1/12", 访问: 3792, 下单: 3492, 数据1: 4233, 数据2: 1243 },
+        { 日期: "1/13", 访问: 3792, 下单: 3492, 数据1: 4233, 数据2: 1243 },
+        { 日期: "1/14", 访问: 3792, 下单: 3492, 数据1: 4233, 数据2: 1243 },
+        { 日期: "1/15", 访问: 3792, 下单: 3492, 数据1: 4233, 数据2: 1243 },
+        { 日期: "1/16", 访问: 3792, 下单: 3492, 数据1: 4233, 数据2: 1243 }
+      ]
+    };
   },
 
   watch: {
@@ -79,11 +105,11 @@ export default {
   },
 
   components: {
-    VeBar,
-    VeLine,
-    VeHistogram,
-    VePie,
-    VeRing
+    // VeBar,
+    VeLine
+    // VeHistogram,
+    // VePie,
+    // VeRing
     // VeWaterfall,
     // VeFunnel,
     // VeRadar,

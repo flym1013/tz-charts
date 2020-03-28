@@ -82,17 +82,14 @@ function getLineSeries(args) {
     // 默认线条样式
     metrics.forEach(item => {
       let index = metrics.indexOf(item);
-
       let color = getColor(metrics, index);
-
       let colorItem = {
         normal: {
           color: color,
           borderColor: color,
-          borderWidth: 3
+          borderWidth: 5
         }
       };
-
       itemStyleList.push(colorItem);
     });
   }
@@ -123,25 +120,23 @@ function getLineSeries(args) {
         // 自定义
         normal: {
           // eslint-disable-next-line no-undef
-          // new echarts.graphic.LinearGradient(
-          //   0,
-          //   0,
-          //   0,
-          //   1,
-          //   [
-          //     {
-          //       offset: 0,
-          //       color: "rgba(255, 205, 47, 0.2)"
-          //     },
-          //     {
-          //       offset: 1,
-          //       color: "rgba(255, 205, 47, 0)"
-          //     }
-          //   ],
-          //   false
-          // )
-
-          color: "rgba(255, 205, 47, 0.1)",
+          color: new echarts.graphic.LinearGradient(
+            0,
+            0,
+            0,
+            1,
+            [
+              {
+                offset: 0,
+                color: "rgba(255, 205, 47, 0.2)"
+              },
+              {
+                offset: 1,
+                color: "rgba(255, 205, 47, 0)"
+              }
+            ],
+            false
+          ),
           shadowColor: "rgba(255, 205, 47, 0.1)",
           shadowBlur: 10
         }
@@ -390,7 +385,7 @@ export const line = (columns, rows, settings, extra) => {
     dimension
   });
 
-  // 标题样式
+  // 标题
   const title = {
     textStyle: {
       fontSize: 16,
@@ -401,10 +396,7 @@ export const line = (columns, rows, settings, extra) => {
       10, // 右
       5, // 下
       20 // 左
-    ],
-    left: 10,
-    top: 10,
-    show: true
+    ]
   };
   const _grid = getGrid(grid);
   let options = { title, legend, xAxis, series, yAxis, tooltip, grid: _grid };
