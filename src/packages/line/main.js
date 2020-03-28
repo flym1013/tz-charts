@@ -401,8 +401,6 @@ export const line = (columns, rows, settings, extra) => {
       20 // 左
     ]
   };
-
-  console.log(series);
   const _grid = getGrid(grid);
   let options = { title, legend, xAxis, series, yAxis, tooltip, grid: _grid };
   return options;

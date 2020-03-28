@@ -166,10 +166,6 @@ export default {
     },
 
     chartColor() {
-      console.log("表格颜色输出");
-      console.log(
-        this.colors || (this.theme && this.theme.color) || DEFAULT_COLORS
-      );
       return this.colors || (this.theme && this.theme.color) || DEFAULT_COLORS;
     }
   },
@@ -188,10 +184,7 @@ export default {
         _once: this._once
       };
       if (this.beforeConfig) data = this.beforeConfig(data);
-      console.log("开始加载配置项");
       let options = this.chartHandler(columns, rows, this.settings, extra);
-      console.log("配置项目");
-      console.log(options);
       if (options) {
         if (typeof options.then === "function") {
           options.then(this.optionsHandler);
@@ -221,9 +214,6 @@ export default {
 
     // 递归合拼数据
     mergeData(options, setting) {
-      console.log("递归合拼数据");
-      console.log(options);
-      console.log(setting);
       if (!options) {
         options = {};
       }
@@ -306,8 +296,6 @@ export default {
 
       if (this._isDestroyed) return;
       if (this.log) console.log(options);
-      console.log("将参数设置到图表");
-      console.log(options);
       // 将参数设置到图表
       this.echarts.setOption(options, setOptionOpts);
       this.$emit("ready", this.echarts, options, echartsLib);
