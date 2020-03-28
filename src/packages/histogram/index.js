@@ -1,10 +1,10 @@
 import 'echarts/lib/chart/bar'
-import { bar } from './main'
+import { histogram } from '../bar/main'
 import Core from '../../core'
 export default Object.assign({}, Core, {
-  name: 'VeBar',
+  name: 'VeHistogram',
   data () {
-    this.chartHandler = bar
+    this.chartHandler = histogram
     return {}
   }
 })

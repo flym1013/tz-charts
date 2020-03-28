@@ -6,7 +6,9 @@
         <component
           :is="`ve-${innerType}`"
           :data="d.data"
-          :settings="d.settings">
+          :settings="d.settings"
+          :title="{ text: d.name }"
+        >
         </component>
       </div>
       <div class="code-view">
@@ -24,51 +26,55 @@
 </template>
 
 <script>
-import VeBar from '../../src/packages/bar'
-import VeLine from '../../src/packages/line'
-import VeHistogram from '../../src/packages/histogram'
-import YjroiChart from '../../src/packages/yjroi'
-import VePie from '../../src/packages/pie'
-import VeRing from '../../src/packages/ring'
-import VeWaterfall from '../../src/packages/waterfall'
-import VeFunnel from '../../src/packages/funnel'
-import VeRadar from '../../src/packages/radar'
-import VeChart from '../../src/packages/chart'
-import VeMap from '../../src/packages/map'
-import VeSankey from '../../src/packages/sankey'
-import VeHeatmap from '../../src/packages/heatmap'
-import VeScatter from '../../src/packages/scatter'
-import VeCandle from '../../src/packages/candle'
-import VeGauge from '../../src/packages/gauge'
-import VeTree from '../../src/packages/tree'
-import VeLiquidfill from '../../src/packages/liquidfill'
-import VeWordcloud from '../../src/packages/wordcloud'
-import CHART_DATA from '../data'
+import VeBar from "../../src/packages/bar";
+import VeLine from "../../src/packages/line";
+import VeHistogram from "../../src/packages/histogram";
+import VePie from "../../src/packages/pie";
+import VeRing from "../../src/packages/ring";
+
+// import VeWaterfall from '../../src/packages/waterfall'
+// import VeFunnel from '../../src/packages/funnel'
+// import VeRadar from '../../src/packages/radar'
+// import VeChart from '../../src/packages/chart'
+// import VeMap from '../../src/packages/map'
+// import VeSankey from '../../src/packages/sankey'
+// import VeHeatmap from '../../src/packages/heatmap'
+// import VeScatter from '../../src/packages/scatter'
+// import VeCandle from '../../src/packages/candle'
+// import VeGauge from '../../src/packages/gauge'
+// import VeTree from '../../src/packages/tree'
+// import VeLiquidfill from '../../src/packages/liquidfill'
+// import VeWordcloud from '../../src/packages/wordcloud'
+
+import CHART_DATA from "../data";
 
 export default {
-  name: 'Item',
+  name: "Item",
 
-  data () {
+  data() {
     return {
+      title: { text: "333332323" },
       chartData: [],
       type: null,
       innerType: null
-    }
+    };
   },
 
   methods: {
-    init () {
-      this.type = this.$route.params.type
-      this.chartData = CHART_DATA[this.type].data
-      this.innerType = CHART_DATA[this.type].type
+    init() {
+      this.type = this.$route.params.type;
+      this.chartData = CHART_DATA[this.type].data;
+      this.innerType = CHART_DATA[this.type].type;
     }
   },
 
-  created () { this.init() },
+  created() {
+    this.init();
+  },
 
   watch: {
-    $route () {
-      this.init()
+    $route() {
+      this.init();
     }
   },
 
@@ -76,29 +82,29 @@ export default {
     VeBar,
     VeLine,
     VeHistogram,
-    YjroiChart,
     VePie,
-    VeRing,
-    VeWaterfall,
-    VeFunnel,
-    VeRadar,
-    VeChart,
-    VeMap,
-    VeSankey,
-    VeHeatmap,
-    VeScatter,
-    VeCandle,
-    VeGauge,
-    VeTree,
-    VeLiquidfill,
-    VeWordcloud
+    VeRing
+    // VeWaterfall,
+    // VeFunnel,
+    // VeRadar,
+    // VeChart,
+    // VeMap,
+    // VeSankey,
+    // VeHeatmap,
+    // VeScatter,
+    // VeCandle,
+    // VeGauge,
+    // VeTree,
+    // VeLiquidfill,
+    // VeWordcloud
   }
-}
+};
 </script>
 
 <style lang="less">
 .page-item-test {
-  h3, p {
+  h3,
+  p {
     margin: 0;
   }
 

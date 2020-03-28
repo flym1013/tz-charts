@@ -1,23 +1,24 @@
 <template>
   <div>
-    <ve-amap
+    <!-- <ve-amap
       :settings="chartSettings"
       :series="chartSeries"
       :after-set-option-once="getMap"
-      :tooltip="{ show: true }">
-    </ve-amap>
+      :tooltip="{ show: true }"
+    >
+    </ve-amap> -->
   </div>
 </template>
 
 <script>
-import VeAmap from '../../src/packages/amap'
+// import VeAmap from '../../src/packages/amap'
 export default {
-  name: 'amap',
-  data () {
+  name: "amap",
+  data() {
     return {
       chartSettings: {
-        key: '08ec82355a34cc2f501fd51139227f32',
-        v: '1.4.3',
+        key: "08ec82355a34cc2f501fd51139227f32",
+        v: "1.4.3",
         amap: {
           resizeEnable: true,
           center: [120.14322240845, 30.236064370321],
@@ -26,22 +27,23 @@ export default {
       },
       chartSeries: [
         {
-          type: 'scatter',
-          coordinateSystem: 'amap',
-          data: [
-            [120, 30, 1]
-          ]
+          type: "scatter",
+          coordinateSystem: "amap",
+          data: [[120, 30, 1]]
         }
       ]
-    }
+    };
   },
 
   methods: {
-    getMap (echarts) {
-      echarts.getModel().getComponent('amap').getAMap()
+    getMap(echarts) {
+      echarts
+        .getModel()
+        .getComponent("amap")
+        .getAMap();
     }
-  },
+  }
 
-  components: { VeAmap }
-}
+  // components: { VeAmap }
+};
 </script>

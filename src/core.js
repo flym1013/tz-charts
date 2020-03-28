@@ -243,6 +243,7 @@ export default {
       // 遍历用户设置属性，合并数据
       ECHARTS_SETTINGS.forEach(setting => {
         if (this[setting]) {
+          console.log(this[setting]);
           options[setting] = this.mergeData(options[setting], this[setting]);
         }
       });
@@ -296,6 +297,7 @@ export default {
 
       if (this._isDestroyed) return;
       if (this.log) console.log(options);
+      console.log("打印图表生成前参数", options);
       // 将参数设置到图表
       this.echarts.setOption(options, setOptionOpts);
       this.$emit("ready", this.echarts, options, echartsLib);
