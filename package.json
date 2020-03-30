@@ -6,11 +6,10 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config ./build/webpack.config.js",
     "build": "node build/rollup.config.js",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm run build && lerna version && npm run version",
     "test": "karma start ./test/karma.conf.js",
     "docs": "docsify serve docs",
     "deploy": "gh-pages -d docs",
-    "dsx": "lerna version",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s && conventional-changelog -p angular -i CHANGELOG_CN.md -s && git add CHANGELOG.md CHANGELOG_CN.md"
   },
   "repository": {
