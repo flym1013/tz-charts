@@ -27,7 +27,7 @@
 <script>
 // import VeBar from "../../src/packages/bar";
 // import { VeLine } from "../../src/index.es";
-import { VeLine } from "../../src/index.es";
+import VeLine from "../../lib/line.es.js";
 // import VeLine from "../../src/packages/line";
 // import VeHistogram from "../../src/packages/histogram";
 // import VePie from "../../src/packages/pie";

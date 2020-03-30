@@ -1,3 +1,4 @@
+import echarts from "echarts";
 import { getFormated, getStackMap } from "../../utils.js";
 import { isArray } from "utils-lite";
 import {

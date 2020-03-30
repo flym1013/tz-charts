@@ -1,8 +1,6 @@
 import VeBar from "./packages/bar";
 import VeLine from "./packages/line";
-import YjroiChart from "./packages/yjroi";
-
-const components = [VeBar, VeLine, YjroiChart];
+const components = [VeBar, VeLine];
 
 function install(Vue, _) {
   components.forEach(component => {
@@ -10,4 +8,4 @@ function install(Vue, _) {
   });
 }
 
-export { VeBar, VeLine, YjroiChart, install };
+export { VeBar, VeLine, install };
