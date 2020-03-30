@@ -3,12 +3,7 @@
     <div class="chart-item" v-for="(d, i) in chartData" :key="i">
       <div class="chart-part">
         <!-- <h3>{{ d.name }}</h3> -->
-        <component
-          :is="`ve-${innerType}`"
-          :data="d.data"
-          :title="{ text: d.name }"
-        >
-        </component>
+        <component :is="`ve-${innerType}`" :data="d.data" :title="{ text: d.name }"></component>
       </div>
       <div class="code-view">
         <p>数据格式</p>
@@ -31,6 +26,7 @@ import VeLine from "../../lib/line.es.js";
 // import VeLine from "../../src/packages/line";
 // import VeHistogram from "../../src/packages/histogram";
 // import VePie from "../../src/packages/pie";
+import VePie from "../../lib/pie.es.js";
 // import VeRing from "../../src/packages/ring";
 
 // import VeWaterfall from '../../src/packages/waterfall'
@@ -106,9 +102,9 @@ export default {
 
   components: {
     // VeBar,
-    VeLine
+    VeLine,
     // VeHistogram,
-    // VePie,
+    VePie
     // VeRing
     // VeWaterfall,
     // VeFunnel,
