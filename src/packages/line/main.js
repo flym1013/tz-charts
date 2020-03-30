@@ -137,12 +137,9 @@ function getLineSeries(args) {
 }
 
 function getLeftData(min, max) {
-  console.log("max", max);
-
   // 最高位向上取整
   if (max > 1) {
-    let strMax = max + "";
-    console.log(strMax.substring(1, strMax.length));
+    let strMax = (max + "").split(".")[0];
     let firstC = parseInt(strMax.substring(0, 1)) + 1;
     for (let i = 0; i < strMax.substring(1, strMax.length).length; i++) {
       firstC = firstC + "0";
@@ -152,7 +149,6 @@ function getLeftData(min, max) {
     // 小于1的情况暂时不处理直接为1
     max = 1;
   }
-  console.log("max", max);
   // 控制分割条数，
   const distance = parseFloat(((max - min) / 4).toString(), 10);
   return {
