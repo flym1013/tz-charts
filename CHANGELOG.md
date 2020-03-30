@@ -1,3 +1,7 @@
+# [1.1.0-alpha.0](https://github.com/ElemeFE/v-charts/compare/v1.0.8-0...v1.1.0-alpha.0) (2020-03-30)
+
+
+
 ## [1.0.8-0](https://github.com/ElemeFE/v-charts/compare/e43b83383b8b9f6ffde400b1b116fd250fb27219...v1.0.8-0) (2020-03-30)
 
 
