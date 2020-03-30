@@ -140,8 +140,11 @@ function getLineSeries(args) {
         }
       };
     }
+
+    seriesItem.yAxisIndex = 0;
     if (axisSite.right) {
-      seriesItem.yAxisIndex = ~axisSite.right.indexOf(item) ? 1 : 0;
+      seriesItem.yAxisIndex =
+        axisSite.right.indexOf(seriesItem.name) >= 0 ? 1 : 0;
     }
 
     if (stack && stackMap[item]) seriesItem.stack = stackMap[item];
@@ -154,7 +157,6 @@ function getLineSeries(args) {
     seriesItem.symbol = "circle";
     seriesItem.symbolSize = 6;
     seriesItem.showSymbol = true;
-    seriesItem.yAxisIndex = 1;
     seriesItem.barGap = "15";
     series.push(seriesItem);
   });
@@ -205,6 +207,9 @@ function getLineYAxis(args) {
         color: "#E4E7ED"
       }
     };
+    if (i === 1) {
+      yAxis[i].position = "right";
+    }
   }
   return yAxis;
 }
@@ -243,7 +248,6 @@ function getLineTooltip(args) {
       const title = name || axisValueLabel;
       tpl.push(`${title}<br>`);
       items.forEach(({ seriesName, data, color }) => {
-        console.log(items);
         let showData = null;
         const type = ~rightList.indexOf(seriesName)
           ? yAxisType[1]
@@ -393,8 +397,8 @@ export const line = (columns, rows, settings, extra) => {
     },
     padding: [
       20, // 上
-      10, // 右
-      5, // 下
+      20, // 右
+      20, // 下
       20 // 左
     ]
   };
