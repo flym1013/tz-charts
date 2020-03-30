@@ -10,6 +10,7 @@
     "test": "karma start ./test/karma.conf.js",
     "docs": "docsify serve docs",
     "deploy": "gh-pages -d docs",
+    "dsx": "lerna version",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s && conventional-changelog -p angular -i CHANGELOG_CN.md -s && git add CHANGELOG.md CHANGELOG_CN.md"
   },
   "repository": {
@@ -74,6 +75,7 @@
     "karma-phantomjs-launcher": "^1.0.4",
     "karma-spec-reporter": "^0.0.32",
     "karma-webpack": "^3.0.0",
+    "lerna": "^3.20.2",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
     "phantomjs-prebuilt": "^2.1.16",
