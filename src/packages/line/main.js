@@ -113,11 +113,10 @@ function getLineSeries(args) {
     }
 
     seriesItem.yAxisIndex = 0;
-    console.log("axisSite", axisSite);
+
     if (axisSite.right) {
       seriesItem.yAxisIndex =
         axisSite.right.indexOf(seriesItem.name) >= 0 ? 1 : 0;
-      console.log(axisSite.right.indexOf(seriesItem.name));
     }
 
     if (stack && stackMap[item]) seriesItem.stack = stackMap[item];
@@ -160,7 +159,7 @@ function getLeftData(min, max) {
 
 function getLineYAxis(args) {
   const { yAxisName, yAxisType, axisVisible, scale, emin, emax, digit } = args;
-  console.log("getLineYAxis", args);
+
   const yAxisBase = {
     type: "value",
     axisTick: {
@@ -361,8 +360,6 @@ export const line = (columns, rows, settings, extra) => {
     grid
   } = settings;
 
-  console.log("settings", settings);
-
   function getMaxByKey(list, key) {
     let max = 0;
     list.forEach(item => {
@@ -414,8 +411,6 @@ export const line = (columns, rows, settings, extra) => {
     emin[0] = min1;
     emin[1] = min2;
   }
-
-  console.log(emax);
 
   const { tooltipVisible, legendVisible, tooltipFormatter } = extra;
   let metrics = columns.slice();
