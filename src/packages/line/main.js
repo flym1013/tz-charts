@@ -7,36 +7,6 @@ import {
   DEFAULT_COLORS_20
 } from "../../constants.js";
 
-function getLineXAxis(args) {
-  const { dimension, rows, xAxisName, axisVisible, xAxisType } = args;
-  return dimension.map((item, index) => ({
-    type: xAxisType,
-    nameLocation: "middle",
-    nameGap: 22,
-    name: xAxisName[index] || "",
-    axisTick: {
-      show: true,
-      alignWithLabel: true,
-      lineStyle: { color: "#E4E7ED" }
-    },
-    data: rows.map(row => row[item]),
-    show: axisVisible,
-    // 自定义
-    axisLabel: {
-      margin: 10,
-      textStyle: {
-        fontSize: 10,
-        color: "rgba(153, 153, 153, 1)"
-      }
-    },
-    axisLine: {
-      lineStyle: {
-        color: "#E4E7ED"
-      }
-    }
-  }));
-}
-
 // 获取线的颜色
 function getColor(list, index) {
   if (list.length <= 6) {
@@ -143,9 +113,11 @@ function getLineSeries(args) {
     }
 
     seriesItem.yAxisIndex = 0;
+    console.log("axisSite", axisSite);
     if (axisSite.right) {
       seriesItem.yAxisIndex =
         axisSite.right.indexOf(seriesItem.name) >= 0 ? 1 : 0;
+      console.log(axisSite.right.indexOf(seriesItem.name));
     }
 
     if (stack && stackMap[item]) seriesItem.stack = stackMap[item];
@@ -164,8 +136,35 @@ function getLineSeries(args) {
   return series;
 }
 
+function getLeftData(min, max) {
+  console.log("max", max);
+
+  // 最高位向上取整
+  if (max > 1) {
+    let strMax = max + "";
+    console.log(strMax.substring(1, strMax.length));
+    let firstC = parseInt(strMax.substring(0, 1)) + 1;
+    for (let i = 0; i < strMax.substring(1, strMax.length).length; i++) {
+      firstC = firstC + "0";
+    }
+    max = parseInt(firstC);
+  } else {
+    // 小于1的情况暂时不处理直接为1
+    max = 1;
+  }
+  console.log("max", max);
+  // 控制分割条数，
+  const distance = parseFloat(((max - min) / 4).toString(), 10);
+  return {
+    max,
+    min,
+    interval: distance
+  };
+}
+
 function getLineYAxis(args) {
-  const { yAxisName, yAxisType, axisVisible, scale, min, max, digit } = args;
+  const { yAxisName, yAxisType, axisVisible, scale, emin, emax, digit } = args;
+  console.log("getLineYAxis", args);
   const yAxisBase = {
     type: "value",
     axisTick: {
@@ -199,8 +198,9 @@ function getLineYAxis(args) {
     }
     yAxis[i].name = yAxisName[i] || "";
     yAxis[i].scale = scale[i] || false;
-    yAxis[i].min = min[i] || null;
-    yAxis[i].max = max[i] || null;
+    yAxis[i].min = emin[i] || null;
+    yAxis[i].max = getLeftData(emin[i], emax[i]).max;
+    yAxis[i].interval = getLeftData(emin[i], emax[i]).interval;
     // 自定义
     yAxis[i].splitLine = {
       lineStyle: {
@@ -213,6 +213,36 @@ function getLineYAxis(args) {
     }
   }
   return yAxis;
+}
+
+function getLineXAxis(args) {
+  const { dimension, rows, xAxisName, axisVisible, xAxisType } = args;
+  return dimension.map((item, index) => ({
+    type: xAxisType,
+    nameLocation: "middle",
+    nameGap: 22,
+    name: xAxisName[index] || "",
+    axisTick: {
+      show: true,
+      alignWithLabel: true,
+      lineStyle: { color: "#E4E7ED" }
+    },
+    data: rows.map(row => row[item]),
+    show: axisVisible,
+    // 自定义
+    axisLabel: {
+      margin: 10,
+      textStyle: {
+        fontSize: 10,
+        color: "rgba(153, 153, 153, 1)"
+      }
+    },
+    axisLine: {
+      lineStyle: {
+        color: "#E4E7ED"
+      }
+    }
+  }));
 }
 
 function getLineTooltip(args) {
@@ -322,8 +352,8 @@ export const line = (columns, rows, settings, extra) => {
     area,
     stack,
     scale = [false, false],
-    min = [null, null],
-    max = [null, null],
+    min,
+    max,
     nullAddZero = false,
     digit = 2,
     legendName = {},
@@ -334,6 +364,63 @@ export const line = (columns, rows, settings, extra) => {
     areaStyle,
     grid
   } = settings;
+
+  console.log("settings", settings);
+
+  function getMaxByKey(list, key) {
+    let max = 0;
+    list.forEach(item => {
+      if (max < item[key]) {
+        max = item[key];
+      }
+    });
+    return max;
+  }
+  // 计算Y轴坐标最大最小值  左右两边分别计算
+  let leftKeyList = columns.concat();
+  leftKeyList.splice(0, 1); // 第一个X轴数据不需要
+  let rightKeyList = [];
+  if (axisSite.right) {
+    // 存在右坐标
+    for (const key in axisSite.right) {
+      let item = axisSite.right[key];
+      leftKeyList.splice(leftKeyList.indexOf(item), 1);
+      rightKeyList.push(item);
+    }
+  }
+
+  let max1 = 0;
+  leftKeyList.forEach(item => {
+    let max = getMaxByKey(rows, item);
+    if (max1 < max) {
+      max1 = max;
+    }
+  });
+
+  let max2 = 0;
+  rightKeyList.forEach(item => {
+    let max = getMaxByKey(rows, item);
+    if (max2 < max) {
+      max2 = max;
+    }
+  });
+
+  let min1 = 0;
+  let min2 = 0;
+
+  let emax = [0, 0];
+  if (!max) {
+    emax[0] = max1;
+    emax[1] = max2;
+  }
+  let emin = [0, 0];
+  if (!min) {
+    emin[0] = min1;
+    emin[1] = min2;
+  }
+
+  console.log(emax);
+
   const { tooltipVisible, legendVisible, tooltipFormatter } = extra;
   let metrics = columns.slice();
 
@@ -370,8 +457,8 @@ export const line = (columns, rows, settings, extra) => {
     yAxisType,
     axisVisible,
     scale,
-    min,
-    max,
+    emin,
+    emax,
     digit
   });
   const series = getLineSeries({
