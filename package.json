@@ -1,12 +1,12 @@
 {
   "name": "@tzfe/v-charts",
-  "version": "1.1.0-alpha.0",
+  "version": "1.1.0-alpha.1",
   "description": "Vue Echarts Components",
   "main": "lib/index.js",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config ./build/webpack.config.js",
     "build": "node build/rollup.config.js",
-    "prepublishOnly": "npm run build && lerna version && npm run version",
+    "prepublishOnly": "npm run build && lerna version",
     "test": "karma start ./test/karma.conf.js",
     "docs": "docsify serve docs",
     "deploy": "gh-pages -d docs",
