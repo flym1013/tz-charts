@@ -1,4 +1,9 @@
-import { itemPoint } from "../../constants.js";
+import {
+  itemPoint,
+  DEFAULT_COLORS,
+  DEFAULT_COLORS_10,
+  DEFAULT_COLORS_20
+} from "../../constants.js";
 import { getFormated, setArrayValue } from "../../utils.js";
 import { cloneDeep } from "utils-lite";
 
@@ -120,6 +125,14 @@ function getPieLegend(args) {
   } = args;
   let legend = [];
   const levelTemp = [];
+  const defaultSet = {
+    icon: "circle",
+    orient: "horizontal",
+    x: "center",
+    bottom: 20,
+    itemWidth: 6,
+    itemHeight: 6
+  };
   if (level) {
     level.forEach(levelItem => {
       levelItem.forEach(item => {
@@ -137,6 +150,7 @@ function getPieLegend(args) {
   }
   if (legend.length) {
     return {
+      ...defaultSet,
       data: legend,
       show: legend.length < legendLimit,
       formatter(name) {
@@ -182,8 +196,34 @@ function getPieTooltip(args) {
   };
 }
 
+function getColor(length) {
+  if (length <= 6) {
+    return DEFAULT_COLORS;
+  } else if (length > 6 && length <= 10) {
+    return DEFAULT_COLORS_10;
+  } else if (length > 10 && length <= 20) {
+    return DEFAULT_COLORS_20;
+  } else {
+    return DEFAULT_COLORS_20;
+  }
+}
+
+function getPieTitle() {
+  return {
+    textStyle: {
+      fontWeight: "bold",
+      fontSize: 16,
+      color: "rgba(48,48,48,1)"
+    },
+    top: 20,
+    left: 20
+  };
+}
+
 export const pie = (columns, rows, settings, extra, isRing) => {
+  console.log("6666666", settings);
   const innerRows = cloneDeep(rows);
+  const color = getColor(rows.length);
   const {
     dataType = "normal",
     percentShow,
@@ -245,7 +285,8 @@ export const pie = (columns, rows, settings, extra, isRing) => {
       metrics,
       dimension
     });
-  const options = { series, legend, tooltip };
+  const title = getPieTitle();
+  const options = { series, legend, tooltip, color, title };
   return options;
 };
 

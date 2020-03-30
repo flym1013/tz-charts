@@ -3,7 +3,12 @@
     <div class="chart-item" v-for="(d, i) in chartData" :key="i">
       <div class="chart-part">
         <!-- <h3>{{ d.name }}</h3> -->
-        <component :is="`ve-${innerType}`" :data="d.data" :title="{ text: d.name }"></component>
+        <component
+          :is="`ve-${innerType}`"
+          :data="d.data"
+          :title="{ text: d.name }"
+          :settings="d.settings"
+        ></component>
       </div>
       <div class="code-view">
         <p>数据格式</p>
