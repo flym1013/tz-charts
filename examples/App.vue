@@ -12,25 +12,39 @@
 </template>
 
 <script>
-import Sidebar from './components/sidebar'
+import Sidebar from "./components/sidebar";
 export default {
-  name: 'App',
+  name: "App",
 
-  created () {
-  },
+  created() {},
 
   components: {
     Sidebar
   }
-}
+};
 </script>
-
 <style lang="less">
+@media (min-width: 1500px) {
+  .right-section {
+    max-width: 1100px;
+  }
+}
+@media (min-width: 1300px) {
+  .right-section {
+    max-width: 900px;
+  }
+}
+@media (min-width: 1900px) {
+  .right-section {
+    max-width: 1200px;
+  }
+}
 * {
   padding: 0;
   margin: 0;
 }
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -66,9 +80,12 @@ html, body {
 
     .right-section {
       flex: 1;
-      overflow: auto;
-      padding: 20px;
       font-size: 14px;
+      max-width: 900px;
+      margin: 0 auto;
+      max-width: 80%;
+      padding: 30px 15px 40px;
+      position: relative;
       p {
         line-height: 22px;
       }

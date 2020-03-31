@@ -1,15 +1,6 @@
 <template>
   <div class="page-item-test">
     <div class="chart-item" v-for="(d, i) in chartData" :key="i">
-      <div class="chart-part">
-        <!-- <h3>{{ d.name }}</h3> -->
-        <component
-          :is="`ve-${innerType}`"
-          :data="d.data"
-          :title="{ text: d.name }"
-          :settings="d.settings"
-        ></component>
-      </div>
       <div class="code-view">
         <p>数据格式</p>
         <div class="data-code">
@@ -19,6 +10,17 @@
         <div class="setting-code">
           <code-section :content="d.settings" json></code-section>
         </div>
+      </div>
+      <div class="chart-part">
+        <!-- <h3>{{ d.name }}</h3> -->
+        <component
+          :is="`ve-${innerType}`"
+          :data="d.data"
+          :title="{ text: d.name }"
+          width="100%"
+          height="100%"
+          :settings="d.settings"
+        ></component>
       </div>
     </div>
   </div>
@@ -36,6 +38,7 @@ import VePie from "../../lib/pie.es.js";
 
 // import VeWaterfall from '../../src/packages/waterfall'
 // import VeFunnel from '../../src/packages/funnel'
+import VeFunnel from "../../lib/funnel.es.js";
 // import VeRadar from '../../src/packages/radar'
 // import VeChart from '../../src/packages/chart'
 // import VeMap from '../../src/packages/map'
@@ -109,10 +112,10 @@ export default {
     // VeBar,
     VeLine,
     // VeHistogram,
-    VePie
+    VePie,
     // VeRing
     // VeWaterfall,
-    // VeFunnel,
+    VeFunnel
     // VeRadar,
     // VeChart,
     // VeMap,
@@ -141,15 +144,32 @@ export default {
 
   .chart-item {
     display: flex;
-    padding: 15px;
-
-    .chart-part {
-      flex: 1;
-    }
-
+    font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+    min-height: 400px;
+    position: relative;
+    margin-top: 50px;
     .code-view {
-      width: 400px;
-      margin-left: 20px;
+      border-radius: 2px;
+      height: inherit;
+      margin-right: 10px;
+      overflow: auto;
+      width: 50%;
+      border: 1px solid #eee;
+      p {
+        color: #34495e;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 10px 20px;
+      }
+    }
+    .chart-part {
+      border-radius: 2px;
+      height: inherit;
+      margin-right: 10px;
+      overflow: auto;
+      width: 50%;
+      border: 1px solid #eee;
+      box-sizing: border-box;
     }
   }
 }
