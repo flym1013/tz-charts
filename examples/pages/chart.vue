@@ -32,6 +32,7 @@
 import VeLine from "../../lib/line.es.js";
 // import VeLine from "../../src/packages/line";
 // import VeHistogram from "../../src/packages/histogram";
+import VeHistogram from "../../lib/histogram.es.js";
 // import VePie from "../../src/packages/pie";
 import VePie from "../../lib/pie.es.js";
 // import VeRing from "../../src/packages/ring";
@@ -111,7 +112,7 @@ export default {
   components: {
     // VeBar,
     VeLine,
-    // VeHistogram,
+    VeHistogram,
     VePie,
     // VeRing
     // VeWaterfall,

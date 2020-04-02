@@ -1,5 +1,5 @@
 // import bar from "./bar";
-// import histogram from "./histogram";
+import histogram from "./histogram";
 import line from "./line";
 import pie from "./pie";
 // import ring from "./ring";
@@ -19,7 +19,7 @@ import funnel from "./funnel";
 
 export default {
   // bar,
-  // histogram,
+  histogram,
   line,
   pie,
   // ring
