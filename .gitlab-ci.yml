@@ -1,8 +1,6 @@
 image: node:8.11.2
 
 pages:
-  stage: deploy
-
   script:
     - mkdir .public
     - cp -r docs/. .public
