@@ -13,21 +13,19 @@
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s && conventional-changelog -p angular -i CHANGELOG_CN.md -s && git add CHANGELOG.md CHANGELOG_CN.md"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ElemeFE/v-charts.git"
+    "type": "gitLab",
+    "url": "http://git.tanzk.cn/frontend/teaching/tz-chart.git"
   },
   "keywords": [
     "vue",
     "echarts"
   ],
-  "author": "xiguaxigua",
+  "author": "xieshuaiyun",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ElemeFE/v-charts/issues"
+    "url": "http://git.tanzk.cn/frontend/teaching/tz-chart/issues"
   },
-  "homepage": "https://v-charts.js.org",
   "peerDependencies": {
-    "echarts": ">3.0.0",
     "vue": ">2.0.0"
   },
   "dependencies": {
@@ -51,8 +49,8 @@
     "conventional-changelog-cli": "^2.0.1",
     "css-loader": "^0.28.11",
     "cssnano": "^3.10.0",
-    "docsify-cli": "^4.2.1",
-    "echarts": "^4.1.0",
+    "docsify-cli": "^4.4.0",
+    "echarts": "^4.7.0",
     "es6-promise": "^4.2.4",
     "eslint": "^4.19.1",
     "eslint-config-standard": "^11.0.0",

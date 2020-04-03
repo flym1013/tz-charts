@@ -20,6 +20,10 @@ const args = yParser(process.argv.slice(2));
 
 const lib = path.join(process.cwd(), "lib");
 
+function copyFile(src, dist) {
+  fs.writeFileSync(dist, fs.readFileSync(src));
+}
+
 rimraf.sync(lib);
 fs.mkdirSync(lib);
 
@@ -36,6 +40,7 @@ pkg = pkg.concat(addons);
 
 pkg.forEach(item => {
   rollupFn(item);
+  // copyFile("lib/index.min.js", "docs/index.min.js");
 });
 
 async function rollupFn(item) {
