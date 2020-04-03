@@ -4,17 +4,8 @@
       :settings="chartSettings"
       :data="performanceTrendscharts"
       :log="true"
-    ></ve-line> -->
+    ></ve-line>-->
     <div class="chart-item" v-for="(d, i) in chartData" :key="i">
-      <div class="chart-part">
-        <component
-          :is="`ve-${innerType}`"
-          :data="d.data"
-          :title="{ text: d.name }"
-          :log="true"
-        >
-        </component>
-      </div>
       <div class="code-view">
         <p>数据格式</p>
         <div class="data-code">
@@ -24,6 +15,17 @@
         <div class="setting-code">
           <code-section :content="d.settings" json></code-section>
         </div>
+      </div>
+      <div class="chart-part">
+        <!-- <h3>{{ d.name }}</h3> -->
+        <component
+          :is="`ve-${innerType}`"
+          :data="d.data"
+          :title="{ text: d.name }"
+          width="100%"
+          height="100%"
+          :settings="d.settings"
+        ></component>
       </div>
     </div>
   </div>
@@ -35,11 +37,15 @@
 import { VeLine } from "../../src/index.es.js";
 // import VeLine from "../../src/packages/line";
 // import VeHistogram from "../../src/packages/histogram";
+import VeHistogram from "../../lib/histogram.es.js";
 // import VePie from "../../src/packages/pie";
+import VePie from "../../lib/pie.es.js";
 // import VeRing from "../../src/packages/ring";
 
 // import VeWaterfall from '../../src/packages/waterfall'
 // import VeFunnel from '../../src/packages/funnel'
+import VeFunnel from "../../lib/funnel.es.js";
+import VeMini from "../../lib/mini.es.js";
 // import VeRadar from '../../src/packages/radar'
 // import VeChart from '../../src/packages/chart'
 // import VeMap from '../../src/packages/map'
@@ -116,12 +122,13 @@ export default {
 
   components: {
     // VeBar,
-    VeLine
-    // VeHistogram,
-    // VePie,
+    VeLine,
+    VeHistogram,
+    VeMini,
+    VePie,
     // VeRing
     // VeWaterfall,
-    // VeFunnel,
+    VeFunnel
     // VeRadar,
     // VeChart,
     // VeMap,
@@ -150,15 +157,32 @@ export default {
 
   .chart-item {
     display: flex;
-    padding: 15px;
-
-    .chart-part {
-      flex: 1;
-    }
-
+    font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+    min-height: 400px;
+    position: relative;
+    margin-top: 50px;
     .code-view {
-      width: 400px;
-      margin-left: 20px;
+      border-radius: 2px;
+      height: inherit;
+      margin-right: 10px;
+      overflow: auto;
+      width: 50%;
+      border: 1px solid #eee;
+      p {
+        color: #34495e;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 10px 20px;
+      }
+    }
+    .chart-part {
+      border-radius: 2px;
+      height: inherit;
+      margin-right: 10px;
+      overflow: auto;
+      width: 50%;
+      border: 1px solid #eee;
+      box-sizing: border-box;
     }
   }
 }

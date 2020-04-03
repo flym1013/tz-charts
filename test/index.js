@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
-import Vue from 'vue'
-import chartData from '../examples/data/index.js'
-import 'echarts/lib/component/tooltip'
-import 'echarts/lib/component/legend'
+import Vue from "vue";
+import chartData from "../examples/data/index.js";
+import "echarts/lib/component/tooltip";
+import "echarts/lib/component/legend";
 import {
   VeLine,
   VeBar,
@@ -11,6 +11,7 @@ import {
   VePie,
   VeRing,
   VeFunnel,
+  VeMinibar,
   VeRadar,
   VeWaterfall,
   VeChart,
@@ -22,9 +23,9 @@ import {
   VeGauge,
   VeLiquidfill,
   VeWordcloud
-} from '../lib/index.esm'
+} from "../lib/index.esm";
 
-window.Promise = require('es6-promise').Promise
+window.Promise = require("es6-promise").Promise;
 
 const comps = {
   line: VeLine,
@@ -34,6 +35,7 @@ const comps = {
   pie: VePie,
   ring: VeRing,
   funnel: VeFunnel,
+  minibar: VeMinibar,
   radar: VeRadar,
   waterfall: VeWaterfall,
   chart: VeChart,
@@ -45,36 +47,36 @@ const comps = {
   gauge: VeGauge,
   liquidfill: VeLiquidfill,
   wordcloud: VeWordcloud
-}
-let box
-let vm = {}
-createBox()
+};
+let box;
+let vm = {};
+createBox();
 
 afterEach(() => {
-  if (vm.$el) document.body.removeChild(vm.$el)
-  createBox()
-})
+  if (vm.$el) document.body.removeChild(vm.$el);
+  createBox();
+});
 
 Object.keys(comps).forEach(type => {
   chartData[type].data.forEach(item => {
-    describe(type + ': ', () => {
-      testMount(type, comps[type], item)
-    })
-  })
-})
+    describe(type + ": ", () => {
+      testMount(type, comps[type], item);
+    });
+  });
+});
 
-function testMount (type, comp, item) {
+function testMount(type, comp, item) {
   it(item.name, () => {
-    const Ctor = Vue.extend(comp)
+    const Ctor = Vue.extend(comp);
     const vm = new Ctor({
       propsData: { data: item.data, settings: item.settings }
-    }).$mount(box)
-    expect(vm.$el.classList.contains('ve-' + type)).toEqual(true)
-  })
+    }).$mount(box);
+    expect(vm.$el.classList.contains("ve-" + type)).toEqual(true);
+  });
 }
 
-function createBox () {
-  box = document.createElement('div')
-  box.id = 'app'
-  document.body.appendChild(box)
+function createBox() {
+  box = document.createElement("div");
+  box.id = "app";
+  document.body.appendChild(box);
 }

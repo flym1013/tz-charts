@@ -93,6 +93,19 @@ export const itemPoint = color => {
   ].join("");
 };
 
+export const itemPoints = color => {
+  return [
+    '<span style="',
+    `background-color:${color};`,
+    "display: inline-block;",
+    "width: 6px;",
+    "height: 6px;",
+    "border-radius: 50%;",
+    "margin-right:5px;",
+    '"></span>'
+  ].join("");
+};
+
 export const STATIC_PROPS = [
   "initOptions",
   "loading",
