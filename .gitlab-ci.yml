@@ -1,0 +1,16 @@
+image: node:8.11.2
+
+pages:
+  stage: deploy
+
+  script:
+    - mkdir .public
+    - cp -r docs/. .public
+    - mv .public public
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
+  tags:
+    - tzedu

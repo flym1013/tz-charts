@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>v-charts</title>
   <meta name="description" content="Description">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-ui@1.4.0/lib/theme-default/index.css">
@@ -13,8 +15,9 @@
   <link rel="stylesheet" href="./style.min.css">
   <script src="https://cdn.jsdelivr.net/npm/docsify-edit-on-github@1.0.1/index.js"></script>
   <script>
+    // eslint-disable-next-line no-use-before-define
     var _hmt = _hmt || [];
-    (function() {
+    (function () {
       var hm = document.createElement("script");
       hm.src = "https://hm.baidu.com/hm.js?5ee0572527c9a12ee663f2c0bb7cd1dd";
       var s = document.getElementsByTagName("script")[0];
@@ -22,6 +25,7 @@
     })();
   </script>
 </head>
+
 <body>
   <div id="app"></div>
   <script>
@@ -38,9 +42,9 @@
       "https://cdn.jsdelivr.net/npm/v-charts/lib/style.min.css"
     ]
     window.$docsify = {
-      name: 'v-charts',
-      repo: 'https://github.com/ElemeFE/v-charts',
-      loadSidebar: 'sidebar.md',
+      name: '@tzfe/v-charts',
+      repo: 'http://git.tanzk.cn/frontend/teaching/tz-chart',
+      loadSidebar: true,
       ga: 'UA-120605025-3',
       homepage: 'install.md',
       formatUpdated: '{MM}/{DD} {HH}:{mm}',
@@ -58,15 +62,15 @@
         },
         depth: 2
       },
-      loadNavbar: true,
-      loadNavbar: 'navbar.md',
+      // loadNavbar: true,
       plugins: [
+        // eslint-disable-next-line no-undef
         EditOnGithubPlugin.create(
-          'https://github.com/ElemeFE/v-charts/blob/master/docs/'
+          'http://git.tanzk.cn/frontend/teaching/tz-chart/blob/master/docs/'
         )
       ]
     }
-    function getVuepText () {
+    function getVuepText() {
       window.VUEP_TEXT = window.location.hash.indexOf('#/en/')
         ? '跳转至 JSFiddle 运行'
         : 'Run on JSFiddle'
@@ -89,4 +93,5 @@
   <script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@1.1.3/dist/echarts-wordcloud.min.js"></script>
   <script src="./index.min.js"></script>
 </body>
+
 </html>

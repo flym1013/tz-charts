@@ -5,29 +5,29 @@
 <vuep template="#simple-line"></vuep>
 
 <script v-pre type="text/x-template" id="simple-line">
-<template>
-  <ve-line :data="chartData"></ve-line>
-</template>
+  <template>
+    <ve-line :data="chartData"></ve-line>
+  </template>
 
-<script>
-  export default {
-    data: function () {
-      return {
-        chartData: {
-          columns: ['日期', '访问用户', '下单用户', '下单率'],
-          rows: [
-            { '日期': '1/1', '访问用户': 1393, '下单用户': 1093, '下单率': 0.32 },
-            { '日期': '1/2', '访问用户': 3530, '下单用户': 3230, '下单率': 0.26 },
-            { '日期': '1/3', '访问用户': 2923, '下单用户': 2623, '下单率': 0.76 },
-            { '日期': '1/4', '访问用户': 1723, '下单用户': 1423, '下单率': 0.49 },
-            { '日期': '1/5', '访问用户': 3792, '下单用户': 3492, '下单率': 0.323 },
-            { '日期': '1/6', '访问用户': 4593, '下单用户': 4293, '下单率': 0.78 }
-          ]
+  <script>
+    module.exports = {
+      data: function () {
+        return {
+          chartData: {
+            columns: ['日期', '访问用户', '下单用户', '下单率'],
+            rows: [
+              { '日期': '1/1', '访问用户': 1393, '下单用户': 1093, '下单率': 0.32 },
+              { '日期': '1/2', '访问用户': 3530, '下单用户': 3230, '下单率': 0.26 },
+              { '日期': '1/3', '访问用户': 2923, '下单用户': 2623, '下单率': 0.76 },
+              { '日期': '1/4', '访问用户': 1723, '下单用户': 1423, '下单率': 0.49 },
+              { '日期': '1/5', '访问用户': 3792, '下单用户': 3492, '下单率': 0.323 },
+              { '日期': '1/6', '访问用户': 4593, '下单用户': 4293, '下单率': 0.78 }
+            ]
+          }
         }
       }
     }
-  }
-</script>
+  </script>
 </script>
 
 #### 设置显示的指标维度
@@ -64,7 +64,7 @@
 </script>
 </script>
 
-#### 设置双y轴
+#### 设置双 y 轴
 
 <vuep template="#set-double-y-axis"></vuep>
 
@@ -318,25 +318,25 @@
 
 #### settings 配置项
 
-| 配置项 | 简介 | 类型 | 备注 |
-| --- | --- | --- | --- |
-| dimension | 维度 | array | 默认columns第一项为维度 |
-| metrics | 指标 | array | 默认columns第二项起为指标 |
-| xAxisType | 横轴的数据类型 | string | 可选值: category, value, time, log |
-| yAxisType | 左右坐标轴数据类型 | array | 可选值: KMB, normal, percent |
-| yAxisName | 左右坐标轴标题 | array | - |
-| axisSite | 指标所在的轴 | object | 默认不在right轴的指标都在left轴 |
-| stack | 堆叠选项 | object | - |
-| area | 是否展示为面积图 | boolean | 默认为false |
-| scale | 是否是脱离 0 值比例 | array | 默认为[false, false]，表示左右<br>两个轴都不会脱离0值比例。<br>设置成 true 后坐标刻度不会<br>强制包含零刻度<br> |
-| min | 左右坐标轴最小值 | array | - |
-| max | 左右坐标轴最大值 | array | - |
-| digit | 设置数据类型为percent时保留的位数 | number | 默认为2 |
-| labelMap | 设置指标的别名，同时作用于提示框和图例 | object | - |
-| legendName | 设置图表上方图例的别名 | object | - |
+| 配置项     | 简介                                   | 类型    | 备注                                                                                                              |
+| ---------- | -------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------- |
+| dimension  | 维度                                   | array   | 默认 columns 第一项为维度                                                                                         |
+| metrics    | 指标                                   | array   | 默认 columns 第二项起为指标                                                                                       |
+| xAxisType  | 横轴的数据类型                         | string  | 可选值: category, value, time, log                                                                                |
+| yAxisType  | 左右坐标轴数据类型                     | array   | 可选值: KMB, normal, percent                                                                                      |
+| yAxisName  | 左右坐标轴标题                         | array   | -                                                                                                                 |
+| axisSite   | 指标所在的轴                           | object  | 默认不在 right 轴的指标都在 left 轴                                                                               |
+| stack      | 堆叠选项                               | object  | -                                                                                                                 |
+| area       | 是否展示为面积图                       | boolean | 默认为 false                                                                                                      |
+| scale      | 是否是脱离 0 值比例                    | array   | 默认为[false, false]，表示左右<br>两个轴都不会脱离 0 值比例。<br>设置成 true 后坐标刻度不会<br>强制包含零刻度<br> |
+| min        | 左右坐标轴最小值                       | array   | -                                                                                                                 |
+| max        | 左右坐标轴最大值                       | array   | -                                                                                                                 |
+| digit      | 设置数据类型为 percent 时保留的位数    | number  | 默认为 2                                                                                                          |
+| labelMap   | 设置指标的别名，同时作用于提示框和图例 | object  | -                                                                                                                 |
+| legendName | 设置图表上方图例的别名                 | object  | -                                                                                                                 |
 
-> 备注1. axisSite 可以设置 left 和 right，例如示例所示 `axisSite: { right: ['占比'] }` 即将占比的数据置于右轴上。
+> 备注 1. axisSite 可以设置 left 和 right，例如示例所示 `axisSite: { right: ['占比'] }` 即将占比的数据置于右轴上。
 
-> 备注2. stack 用于将两数据堆叠起来，例如实例中所示`stack: { '销售额': ['成本', '利润'] }` 即将'成本', '利润'相应的数据堆叠在一起。
+> 备注 2. stack 用于将两数据堆叠起来，例如实例中所示`stack: { '销售额': ['成本', '利润'] }` 即将'成本', '利润'相应的数据堆叠在一起。
 
-> 备注3. min和max的值可以直接设置为数字，例如：`[100, 300]`；也可以设置为`['dataMin', 'dataMin']`, `['dataMax', 'dataMax']`，此时表示使用该坐标轴上的最小值或最大值为最小或最大刻度。
+> 备注 3. min 和 max 的值可以直接设置为数字，例如：`[100, 300]`；也可以设置为`['dataMin', 'dataMin']`, `['dataMax', 'dataMax']`，此时表示使用该坐标轴上的最小值或最大值为最小或最大刻度。
