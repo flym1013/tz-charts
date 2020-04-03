@@ -58,7 +58,7 @@
 ## 安装
 
 ```
-npm i v-charts echarts -S
+npm i @tzfe/v-charts echarts -S
 ```
 
 ## 快速上手
@@ -71,31 +71,31 @@ npm i v-charts echarts -S
 </template>
 
 <script>
-import VeLine from 'v-charts/lib/line.common'
-export default {
-  components: { VeLine },
-  data () {
-    return {
-      chartData: {
-        columns: ['日期', '销售量'],
-        rows: [
-          { '日期': '1月1日', '销售量': 123 },
-          { '日期': '1月2日', '销售量': 1223 },
-          { '日期': '1月3日', '销售量': 2123 },
-          { '日期': '1月4日', '销售量': 4123 },
-          { '日期': '1月5日', '销售量': 3123 },
-          { '日期': '1月6日', '销售量': 7123 }
-        ]
-      }
+  import VeLine from "v-charts/lib/line.common";
+  export default {
+    components: { VeLine },
+    data() {
+      return {
+        chartData: {
+          columns: ["日期", "销售量"],
+          rows: [
+            { 日期: "1月1日", 销售量: 123 },
+            { 日期: "1月2日", 销售量: 1223 },
+            { 日期: "1月3日", 销售量: 2123 },
+            { 日期: "1月4日", 销售量: 4123 },
+            { 日期: "1月5日", 销售量: 3123 },
+            { 日期: "1月6日", 销售量: 7123 }
+          ]
+        }
+      };
     }
-  }
-}
+  };
 </script>
 ```
 
 ## 更新日志
 
-每个版本的详细修改可以参考 [release notes](https://github.com/ElemeFE/v-charts/releases) 或者 [ChangeLog](./CHANGELOG_CN.md)。
+每个版本的详细修改可以参考 [release notes](http://git.tanzk.cn/frontend/teaching/tz-chart.git/releases) 或者 [ChangeLog](./CHANGELOG_CN.md)。
 
 ## 贡献
 
