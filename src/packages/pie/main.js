@@ -258,13 +258,13 @@ function getPieTooltip(args) {
 
 function getColor(length) {
   if (length <= 6) {
-    return DEFAULT_COLORS.reverse();
+    return DEFAULT_COLORS;
   } else if (length > 6 && length <= 10) {
-    return DEFAULT_COLORS_10.reverse();
+    return DEFAULT_COLORS_10;
   } else if (length > 10 && length <= 20) {
-    return DEFAULT_COLORS_20.reverse();
+    return DEFAULT_COLORS_20;
   } else {
-    return DEFAULT_COLORS_20.reverse();
+    return DEFAULT_COLORS_20;
   }
 }
 

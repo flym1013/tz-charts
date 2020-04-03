@@ -5,6 +5,7 @@ module.exports = {
   VePie: { src: "src/packages/pie/index.js", dist: "lib/pie" },
   VeFunnel: { src: "src/packages/funnel/index.js", dist: "lib/funnel" },
   VeMini: { src: "src/packages/mini/index.js", dist: "lib/mini" },
+  VeIndex: { src: "src/packages/index/index.js", dist: "lib/index" },
   VeHistogram: {
     src: "src/packages/histogram/index.js",
     dist: "lib/histogram"
