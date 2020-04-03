@@ -54,7 +54,7 @@
 ## 安装
 
 ```
-npm i v-charts echarts -S
+npm i @tzfe/v-charts echarts -S
 ```
 
 ## 快速上手
@@ -91,7 +91,7 @@ npm i v-charts echarts -S
 
 ## 更新日志
 
-每个版本的详细修改可以参考 [release notes](https://github.com/ElemeFE/v-charts/releases) 或者 [ChangeLog](./CHANGELOG_CN.md)。
+每个版本的详细修改可以参考 [release notes](http://git.tanzk.cn/frontend/teaching/tz-chart.git/releases) 或者 [ChangeLog](./CHANGELOG_CN.md)。
 
 ## 贡献
 
