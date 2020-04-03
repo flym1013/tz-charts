@@ -40,6 +40,7 @@ import VePie from "../../lib/pie.es.js";
 // import VeWaterfall from '../../src/packages/waterfall'
 // import VeFunnel from '../../src/packages/funnel'
 import VeFunnel from "../../lib/funnel.es.js";
+import VeMini from "../../lib/mini.es.js";
 // import VeRadar from '../../src/packages/radar'
 // import VeChart from '../../src/packages/chart'
 // import VeMap from '../../src/packages/map'
@@ -113,6 +114,7 @@ export default {
     // VeBar,
     VeLine,
     VeHistogram,
+    VeMini,
     VePie,
     // VeRing
     // VeWaterfall,

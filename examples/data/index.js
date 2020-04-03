@@ -5,6 +5,7 @@ import pie from "./pie";
 // import ring from "./ring";
 // import waterfall from "./waterfall";
 import funnel from "./funnel";
+import mini from "./mini";
 // import radar from "./radar";
 // import chart from "./chart";
 // import map from "./map";
@@ -24,7 +25,8 @@ export default {
   pie,
   // ring
   // waterfall,
-  funnel
+  funnel,
+  mini
   // radar,
   // chart,
   // map,
