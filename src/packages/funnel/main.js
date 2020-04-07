@@ -17,7 +17,7 @@ function getFunnelTooltip(dataType, digit) {
       tpl.push(
         `<span style='font-size:12px;color:rgba(153,153,153,1);font-family:MicrosoftYaHeiUI;'>${item.name}</span>`
       );
-      tpl.push(`<br/><span style='font-size:12px;color:rgba(48,48,48,1);font-family:MicrosoftYaHeiUI;padding-left: 10px;
+      tpl.push(`<span style='font-size:12px;color:rgba(48,48,48,1);font-family:MicrosoftYaHeiUI;padding-left: 5px;
       '>${getFormated(item.value, dataType, digit)}</span>`);
       // tpl.push(
       //   `${item.name}: ${getFormated(item.data.realValue, dataType, digit)}`
