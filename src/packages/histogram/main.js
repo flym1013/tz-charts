@@ -97,20 +97,6 @@ function getBarMeaAxis(args) {
     } else {
       meaAxis[i] = Object.assign({}, meaAxisBase);
     }
-    meaAxis[i].maxCeil = 0;
-    // if (!max[i]) {
-    //   meaAxis[i] = Object.assign({}, meaAxisBase, {
-    //     max: function(val) {
-    //       console.log("1234", val);
-    //       meaAxis[i].maxCeil = formatMinOrMaxValue(val.max);
-    //       return formatMinOrMaxValue(val.max);
-    //     },
-    //     min: 0,
-    //     splitNumber: 10,
-    //     interval: meaAxis[i].maxCeil ? meaAxis[i].maxCeil / 8 : null
-    //   });
-    //   console.log("522222222222", meaAxis[i].maxCeil);
-    // }
     meaAxis[i].name = meaAxisName[i] || "";
     meaAxis[i].scale = scale[i] || false;
     meaAxis[i].min = min[i] || null;
