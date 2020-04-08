@@ -7,7 +7,7 @@
 ```js
 // main.js
 import Vue from "vue";
-import VCharts from "v-charts";
+import VCharts from "@tzfe/v-charts";
 import App from "./App.vue";
 
 Vue.use(VCharts);
@@ -38,7 +38,7 @@ v-charts 的每种图表组件，都已经单独打包到 lib 文件夹下了
 
 ```js
 import Vue from "vue";
-import VeLine from "v-charts/lib/line.common";
+import VeLine from "@tzfe/v-charts/lib/line.common";
 import App from "./App.vue";
 
 Vue.component(VeLine.name, VeLine);

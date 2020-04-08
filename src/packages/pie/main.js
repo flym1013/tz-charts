@@ -225,6 +225,7 @@ function getPieTooltip(args) {
     trigger: "item",
     padding: 10,
     formatter(item) {
+      console.log(item);
       let tpl = [];
       // tpl.push(itemPoint(item.color));
       tpl.push(

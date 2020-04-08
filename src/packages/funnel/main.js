@@ -69,6 +69,27 @@ function getFunnelSeries(args) {
         borderColor: "#fff",
         borderWidth: 0
       }
+    },
+    labelLine: {
+      normal: {
+        // length: 20,
+        lineStyle: {
+          width: 1,
+          type: "solid",
+          color: "#E4E7ED",
+          fontSize: 12
+        }
+      }
+    },
+    label: {
+      normal: {
+        show: true,
+        position: "left",
+        textStyle: {
+          fontSize: 12,
+          color: "#999999"
+        }
+      }
     }
   };
   let innerRows = rows.sort((a, b) => {
@@ -112,6 +133,27 @@ function getFunnelSeries(args) {
   if (label) series.label = label;
   if (labelLine) series.labelLine = labelLine;
   if (itemStyle) series.itemStyle = itemStyle;
+  if (dimension) {
+    let copySeries = Object.assign({}, series, {
+      labelLine: {
+        show: false
+      },
+      label: {
+        normal: {
+          show: true,
+          position: "inside",
+          textStyle: {
+            fontSize: 12
+          },
+          formatter: function(param) {
+            console.log("85214", param);
+            return param.value;
+          }
+        }
+      }
+    });
+    console.log("1234", series, copySeries);
+  }
   return series;
 }
 
