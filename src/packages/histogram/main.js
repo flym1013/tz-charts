@@ -54,6 +54,28 @@ function getValueAxisData(dims) {
   return result;
 }
 
+function getLeftData(min, max, splitNumber) {
+  // 最高位向上取整
+  if (max > 1) {
+    let strMax = (max + "").split(".")[0];
+    let firstC = parseInt(strMax.substring(0, 1)) + 1;
+    for (let i = 0; i < strMax.substring(1, strMax.length).length; i++) {
+      firstC = firstC + "0";
+    }
+    max = parseInt(firstC);
+  } else {
+    // 小于1的情况暂时不处理直接为1
+    max = 1;
+  }
+  // 控制分割条数，
+  const distance = parseFloat(((max - min) / splitNumber).toString(), 10);
+  return {
+    max,
+    min,
+    interval: distance
+  };
+}
+
 function getBarMeaAxis(args) {
   const {
     meaAxisName,
@@ -62,7 +84,11 @@ function getBarMeaAxis(args) {
     digit,
     scale,
     min,
-    max
+    max,
+    emin,
+    emax,
+    splitNumber,
+    axisSite
   } = args;
   const meaAxisBase = {
     type: "value",
@@ -74,13 +100,6 @@ function getBarMeaAxis(args) {
       lineStyle: {
         color: "#fff"
       }
-    },
-    axisLabel: {
-      margin: 4,
-      textStyle: {
-        fontSize: 10,
-        color: "rgba(153, 153, 153, 1)"
-      }
     }
   };
   let meaAxis = [];
@@ -89,18 +108,37 @@ function getBarMeaAxis(args) {
     if (meaAxisType[i]) {
       meaAxis[i] = Object.assign({}, meaAxisBase, {
         axisLabel: {
+          margin: 4,
+          textStyle: {
+            fontSize: 10,
+            color: "rgba(153, 153, 153, 1)"
+          },
           formatter(val) {
             return getFormated(val, meaAxisType[i], digit);
           }
         }
       });
     } else {
-      meaAxis[i] = Object.assign({}, meaAxisBase);
+      meaAxis[i] = Object.assign({}, meaAxisBase, {
+        axisLabel: {
+          margin: 4,
+          textStyle: {
+            fontSize: 10,
+            color: "rgba(153, 153, 153, 1)"
+          }
+        }
+      });
     }
     meaAxis[i].name = meaAxisName[i] || "";
     meaAxis[i].scale = scale[i] || false;
-    meaAxis[i].min = min[i] || null;
-    meaAxis[i].max = max[i] || null;
+    if (axisSite.right) {
+      meaAxis[i].min = emin[i] || null;
+      meaAxis[i].max = getLeftData(emin[i], emax[i], splitNumber).max;
+      meaAxis[i].interval = getLeftData(emin[i], emax[i], splitNumber).interval;
+    } else {
+      meaAxis[i].min = min[i] || null;
+      meaAxis[i].max = max[i] || null;
+    }
     meaAxis[i].splitLine = {
       lineStyle: {
         type: "dashed",
@@ -365,8 +403,61 @@ export const histogram = (columns, rows, settings, status) => {
     showLine,
     barGap = "-100%",
     opacity,
+    splitNumber = 5,
     grid
   } = settings;
+
+  function getMaxByKey(list, key) {
+    let max = 0;
+    list.forEach(item => {
+      if (max < item[key]) {
+        max = item[key];
+      }
+    });
+    return max;
+  }
+  // 计算Y轴坐标最大最小值  左右两边分别计算
+  let leftKeyList = columns.concat();
+  leftKeyList.splice(0, 1); // 第一个X轴数据不需要
+  let rightKeyList = [];
+  if (axisSite.right) {
+    // 存在右坐标
+    for (const key in axisSite.right) {
+      let item = axisSite.right[key];
+      leftKeyList.splice(leftKeyList.indexOf(item), 1);
+      rightKeyList.push(item);
+    }
+  }
+
+  let max1 = 0;
+  leftKeyList.forEach(item => {
+    let max = getMaxByKey(rows, item);
+    if (max1 < max) {
+      max1 = max;
+    }
+  });
+
+  let max2 = 0;
+  rightKeyList.forEach(item => {
+    let max = getMaxByKey(rows, item);
+    if (max2 < max) {
+      max2 = max;
+    }
+  });
+
+  let min1 = 0;
+  let min2 = 0;
+
+  let emax = [0, 0];
+  if (!max[0] || !max[1]) {
+    emax[0] = max1;
+    emax[1] = max2;
+  }
+  let emin = [0, 0];
+  if (!min[0] || !min[1]) {
+    emin[0] = min1;
+    emin[1] = min2;
+  }
 
   if (dataOrder) {
     const { label, order } = dataOrder;
@@ -417,7 +508,11 @@ export const histogram = (columns, rows, settings, status) => {
     digit,
     scale,
     min,
-    max
+    max,
+    emin,
+    emax,
+    splitNumber,
+    axisSite
   });
   const series = getBarSeries({
     innerRows,

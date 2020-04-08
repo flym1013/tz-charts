@@ -1,4 +1,3 @@
-import echarts from "echarts";
 import { getFormated, getStackMap } from "../../utils.js";
 import { isArray } from "utils-lite";
 import {
@@ -87,28 +86,7 @@ function getLineSeries(args) {
     if (area) {
       seriesItem.areaStyle = {
         // 自定义
-        normal: {
-          // eslint-disable-next-line no-undef
-          color: new echarts.graphic.LinearGradient(
-            0,
-            0,
-            0,
-            1,
-            [
-              {
-                offset: 0,
-                color: "rgba(255, 205, 47, 0.2)"
-              },
-              {
-                offset: 1,
-                color: "rgba(255, 205, 47, 0)"
-              }
-            ],
-            false
-          ),
-          shadowColor: "rgba(255, 205, 47, 0.1)",
-          shadowBlur: 10
-        }
+        normal: {}
       };
     }
 
@@ -135,7 +113,7 @@ function getLineSeries(args) {
   return series;
 }
 
-function getLeftData(min, max) {
+function getLeftData(min, max, splitNumber) {
   // 最高位向上取整
   if (max > 1) {
     let strMax = (max + "").split(".")[0];
@@ -149,7 +127,7 @@ function getLeftData(min, max) {
     max = 1;
   }
   // 控制分割条数，
-  const distance = parseFloat(((max - min) / 4).toString(), 10);
+  const distance = parseFloat(((max - min) / splitNumber).toString(), 10);
   return {
     max,
     min,
@@ -158,7 +136,19 @@ function getLeftData(min, max) {
 }
 
 function getLineYAxis(args) {
-  const { yAxisName, yAxisType, axisVisible, scale, emin, emax, digit } = args;
+  const {
+    yAxisName,
+    yAxisType,
+    axisVisible,
+    scale,
+    emin,
+    emax,
+    min,
+    max,
+    splitNumber,
+    axisSite,
+    digit
+  } = args;
 
   const yAxisBase = {
     type: "value",
@@ -193,9 +183,15 @@ function getLineYAxis(args) {
     }
     yAxis[i].name = yAxisName[i] || "";
     yAxis[i].scale = scale[i] || false;
-    yAxis[i].min = emin[i] || null;
-    yAxis[i].max = getLeftData(emin[i], emax[i]).max;
-    yAxis[i].interval = getLeftData(emin[i], emax[i]).interval;
+    if (axisSite.right) {
+      yAxis[i].min = emin[i] || null;
+      yAxis[i].max = getLeftData(emin[i], emax[i], splitNumber).max;
+      yAxis[i].interval = getLeftData(emin[i], emax[i], splitNumber).interval;
+    } else {
+      yAxis[i].min = min[i] || null;
+      yAxis[i].max = max[i] || null;
+    }
+
     // 自定义
     yAxis[i].splitLine = {
       lineStyle: {
@@ -347,8 +343,8 @@ export const line = (columns, rows, settings, extra) => {
     area,
     stack,
     scale = [false, false],
-    min,
-    max,
+    min = [null, null],
+    max = [null, null],
     nullAddZero = false,
     digit = 2,
     legendName = {},
@@ -357,7 +353,8 @@ export const line = (columns, rows, settings, extra) => {
     itemStyle,
     lineStyle,
     areaStyle,
-    grid
+    grid,
+    splitNumber = 5
   } = settings;
 
   function getMaxByKey(list, key) {
@@ -402,16 +399,15 @@ export const line = (columns, rows, settings, extra) => {
   let min2 = 0;
 
   let emax = [0, 0];
-  if (!max) {
+  if (!max[0] || !max[1]) {
     emax[0] = max1;
     emax[1] = max2;
   }
   let emin = [0, 0];
-  if (!min) {
+  if (!min[0] || !min[1]) {
     emin[0] = min1;
     emin[1] = min2;
   }
-
   const { tooltipVisible, legendVisible, tooltipFormatter } = extra;
   let metrics = columns.slice();
 
@@ -450,6 +446,10 @@ export const line = (columns, rows, settings, extra) => {
     scale,
     emin,
     emax,
+    min,
+    max,
+    splitNumber,
+    axisSite,
     digit
   });
   const series = getLineSeries({

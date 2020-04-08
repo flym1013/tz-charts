@@ -2,22 +2,23 @@
 
 #### settings 配置项
 
-| 配置项     | 简介                                   | 类型    | 备注                                                                                                              |
-| ---------- | -------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------- |
-| dimension  | 维度                                   | array   | 默认 columns 第一项为维度                                                                                         |
-| metrics    | 指标                                   | array   | 默认 columns 第二项起为指标                                                                                       |
-| xAxisType  | 横轴的数据类型                         | string  | 可选值: category, value, time, log                                                                                |
-| yAxisType  | 左右坐标轴数据类型                     | array   | 可选值: KMB, normal, percent                                                                                      |
-| yAxisName  | 左右坐标轴标题                         | array   | -                                                                                                                 |
-| axisSite   | 指标所在的轴                           | object  | 默认不在 right 轴的指标都在 left 轴                                                                               |
-| stack      | 堆叠选项                               | object  | -                                                                                                                 |
-| area       | 是否展示为面积图                       | boolean | 默认为 false                                                                                                      |
-| scale      | 是否是脱离 0 值比例                    | array   | 默认为[false, false]，表示左右<br>两个轴都不会脱离 0 值比例。<br>设置成 true 后坐标刻度不会<br>强制包含零刻度<br> |
-| min        | 左右坐标轴最小值                       | array   | -                                                                                                                 |
-| max        | 左右坐标轴最大值                       | array   | -                                                                                                                 |
-| digit      | 设置数据类型为 percent 时保留的位数    | number  | 默认为 2                                                                                                          |
-| labelMap   | 设置指标的别名，同时作用于提示框和图例 | object  | -                                                                                                                 |
-| legendName | 设置图表上方图例的别名                 | object  | -                                                                                                                 |
+| 配置项      | 简介                                                          | 类型    | 备注                                                                                                              |
+| ----------- | ------------------------------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------- |
+| dimension   | 维度                                                          | array   | 默认 columns 第一项为维度                                                                                         |
+| metrics     | 指标                                                          | array   | 默认 columns 第二项起为指标                                                                                       |
+| xAxisType   | 横轴的数据类型                                                | string  | 可选值: category, value, time, log                                                                                |
+| yAxisType   | 左右坐标轴数据类型                                            | array   | 可选值: KMB, normal, percent                                                                                      |
+| yAxisName   | 左右坐标轴标题                                                | array   | -                                                                                                                 |
+| axisSite    | 指标所在的轴                                                  | object  | 默认不在 right 轴的指标都在 left 轴                                                                               |
+| stack       | 堆叠选项                                                      | object  | -                                                                                                                 |
+| area        | 是否展示为面积图                                              | boolean | 默认为 false                                                                                                      |
+| scale       | 是否是脱离 0 值比例                                           | array   | 默认为[false, false]，表示左右<br>两个轴都不会脱离 0 值比例。<br>设置成 true 后坐标刻度不会<br>强制包含零刻度<br> |
+| min         | 左右坐标轴最小值                                              | array   | -                                                                                                                 |
+| max         | 左右坐标轴最大值                                              | array   | -                                                                                                                 |
+| digit       | 设置数据类型为 percent 时保留的位数                           | number  | 默认为 2                                                                                                          |
+| labelMap    | 设置指标的别名，同时作用于提示框和图例                        | object  | -                                                                                                                 |
+| legendName  | 设置图表上方图例的别名                                        | object  | - -                                                                                                               |
+| splitNumber | 设置左右坐标轴的分段数量，设置了 axisSite 在 right 轴时才生效 | number  | 默认值为 5                                                                                                        |  |
 
 > 备注 1. axisSite 可以设置 left 和 right，例如示例所示 `axisSite: { right: ['占比'] }` 即将占比的数据置于右轴上。
 
