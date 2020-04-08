@@ -1,4 +1,4 @@
-# 柱状图
+# MINI 图
 
 #### settings 配置项
 
@@ -37,11 +37,11 @@
 
 #### 示例
 
-<vuep template="#simple-histogram-chart"></vuep>
+<vuep template="#simple-mini-chart"></vuep>
 
-<script v-pre type="text/x-template" id="simple-histogram-chart">
+<script v-pre type="text/x-template" id="simple-mini-chart">
 <template>
-  <ve-histogram :data="chartData"></ve-histogram>
+  <ve-mini :data="chartData" height='200px'></ve-mini>
 </template>
 
 <script>
@@ -49,15 +49,156 @@
     data () {
       return {
         chartData: {
-          columns: ['日期', '访问用户', '下单用户', '下单率'],
-          rows: [
-            { '日期': '1/1', '访问用户': 1393, '下单用户': 1093, '下单率': 0.32 },
-            { '日期': '1/2', '访问用户': 3530, '下单用户': 3230, '下单率': 0.26 },
-            { '日期': '1/3', '访问用户': 2923, '下单用户': 2623, '下单率': 0.76 },
-            { '日期': '1/4', '访问用户': 1723, '下单用户': 1423, '下单率': 0.49 },
-            { '日期': '1/5', '访问用户': 3792, '下单用户': 3492, '下单率': 0.323 },
-            { '日期': '1/6', '访问用户': 4593, '下单用户': 4293, '下单率': 0.78 }
-          ]
+        columns: ["日期", "余额"],
+        rows: [
+          { 日期: "1-1", 余额: 1232, 年龄: 10 },
+          { 日期: "1-2", 余额: 1223, 年龄: 6 },
+          { 日期: "1-3", 余额: 2123, 年龄: 9 },
+          { 日期: "1-4", 余额: 4123, 年龄: 12 },
+          { 日期: "1-5", 余额: 3123, 年龄: 15 },
+          { 日期: "1-6", 余额: 123, 年龄: 3 },
+          { 日期: "1-7", 余额: 1223, 年龄: 6 },
+          { 日期: "1-8", 余额: 2123, 年龄: 9 },
+          { 日期: "1-9", 余额: 4123, 年龄: 12 },
+          { 日期: "1-10", 余额: 3123, 年龄: 15 },
+          { 日期: "1-11", 余额: 123, 年龄: 3 },
+          { 日期: "1-12", 余额: 1223, 年龄: 6 },
+          { 日期: "1-13", 余额: 2123, 年龄: 9 },
+          { 日期: "1-14", 余额: 4123, 年龄: 12 },
+          { 日期: "1-15", 余额: 3123, 年龄: 15 },
+          { 日期: "1-16", 余额: 123, 年龄: 3 },
+          { 日期: "1-17", 余额: 1223, 年龄: 6 },
+          { 日期: "1-18", 余额: 2123, 年龄: 9 },
+          { 日期: "1-19", 余额: 4123, 年龄: 12 },
+          { 日期: "1-20", 余额: 3123, 年龄: 15 },
+          { 日期: "1-21", 余额: 7123, 年龄: 20 },
+          { 日期: "1-22", 余额: 1223, 年龄: 6 },
+          { 日期: "1-23", 余额: 2123, 年龄: 9 },
+          { 日期: "1-24", 余额: 4123, 年龄: 12 },
+          { 日期: "1-25", 余额: 3123, 年龄: 15 },
+          { 日期: "1-26", 余额: 123, 年龄: 3 },
+          { 日期: "1-27", 余额: 1223, 年龄: 6 },
+          { 日期: "1-28", 余额: 2123, 年龄: 9 },
+          { 日期: "1-29", 余额: 4123, 年龄: 12 },
+          { 日期: "1-30", 余额: 3123, 年龄: 15 }
+        ]
+        }
+      }
+    }
+  }
+</script>
+</script>
+
+#### 折线 MINI 图
+
+<vuep template="#simple-mini-line-chart"></vuep>
+
+<script v-pre type="text/x-template" id="simple-mini-line-chart">
+<template>
+  <ve-mini :data="chartData" :settings="chartSettings" height='200px'></ve-mini>
+</template>
+
+<script>
+  export default {
+    data () {
+      this.chartSettings = {
+        title: { text: "折线MINI图" },
+        showLine: ["余额"]
+      }
+      return {
+        chartData: {
+        columns: ["日期", "余额"],
+        rows: [
+          { 日期: "1-1", 余额: 1232, 年龄: 10 },
+          { 日期: "1-2", 余额: 1223, 年龄: 6 },
+          { 日期: "1-3", 余额: 2123, 年龄: 9 },
+          { 日期: "1-4", 余额: 4123, 年龄: 12 },
+          { 日期: "1-5", 余额: 3123, 年龄: 15 },
+          { 日期: "1-6", 余额: 123, 年龄: 3 },
+          { 日期: "1-7", 余额: 1223, 年龄: 6 },
+          { 日期: "1-8", 余额: 2123, 年龄: 9 },
+          { 日期: "1-9", 余额: 4123, 年龄: 12 },
+          { 日期: "1-10", 余额: 3123, 年龄: 15 },
+          { 日期: "1-11", 余额: 123, 年龄: 3 },
+          { 日期: "1-12", 余额: 1223, 年龄: 6 },
+          { 日期: "1-13", 余额: 2123, 年龄: 9 },
+          { 日期: "1-14", 余额: 4123, 年龄: 12 },
+          { 日期: "1-15", 余额: 3123, 年龄: 15 },
+          { 日期: "1-16", 余额: 123, 年龄: 3 },
+          { 日期: "1-17", 余额: 1223, 年龄: 6 },
+          { 日期: "1-18", 余额: 2123, 年龄: 9 },
+          { 日期: "1-19", 余额: 4123, 年龄: 12 },
+          { 日期: "1-20", 余额: 3123, 年龄: 15 },
+          { 日期: "1-21", 余额: 7123, 年龄: 20 },
+          { 日期: "1-22", 余额: 1223, 年龄: 6 },
+          { 日期: "1-23", 余额: 2123, 年龄: 9 },
+          { 日期: "1-24", 余额: 4123, 年龄: 12 },
+          { 日期: "1-25", 余额: 3123, 年龄: 15 },
+          { 日期: "1-26", 余额: 123, 年龄: 3 },
+          { 日期: "1-27", 余额: 1223, 年龄: 6 },
+          { 日期: "1-28", 余额: 2123, 年龄: 9 },
+          { 日期: "1-29", 余额: 4123, 年龄: 12 },
+          { 日期: "1-30", 余额: 3123, 年龄: 15 }
+        ]
+        }
+      }
+    }
+  }
+</script>
+</script>
+
+#### 折线 MINI 面积图
+
+<vuep template="#simple-mini-area-chart"></vuep>
+
+<script v-pre type="text/x-template" id="simple-mini-area-chart">
+<template>
+  <ve-mini :data="chartData" :settings="chartSettings" height='200px'></ve-mini>
+</template>
+
+<script>
+  export default {
+    data () {
+      this.chartSettings = {
+        title: { text: "折线MINI面积图" },
+        showLine: ["余额"],
+        area: true
+      }
+      return {
+        chartData: {
+        columns: ["日期", "余额"],
+        rows: [
+          { 日期: "1-1", 余额: 1232, 年龄: 10 },
+          { 日期: "1-2", 余额: 1223, 年龄: 6 },
+          { 日期: "1-3", 余额: 2123, 年龄: 9 },
+          { 日期: "1-4", 余额: 4123, 年龄: 12 },
+          { 日期: "1-5", 余额: 3123, 年龄: 15 },
+          { 日期: "1-6", 余额: 123, 年龄: 3 },
+          { 日期: "1-7", 余额: 1223, 年龄: 6 },
+          { 日期: "1-8", 余额: 2123, 年龄: 9 },
+          { 日期: "1-9", 余额: 4123, 年龄: 12 },
+          { 日期: "1-10", 余额: 3123, 年龄: 15 },
+          { 日期: "1-11", 余额: 123, 年龄: 3 },
+          { 日期: "1-12", 余额: 1223, 年龄: 6 },
+          { 日期: "1-13", 余额: 2123, 年龄: 9 },
+          { 日期: "1-14", 余额: 4123, 年龄: 12 },
+          { 日期: "1-15", 余额: 3123, 年龄: 15 },
+          { 日期: "1-16", 余额: 123, 年龄: 3 },
+          { 日期: "1-17", 余额: 1223, 年龄: 6 },
+          { 日期: "1-18", 余额: 2123, 年龄: 9 },
+          { 日期: "1-19", 余额: 4123, 年龄: 12 },
+          { 日期: "1-20", 余额: 3123, 年龄: 15 },
+          { 日期: "1-21", 余额: 7123, 年龄: 20 },
+          { 日期: "1-22", 余额: 1223, 年龄: 6 },
+          { 日期: "1-23", 余额: 2123, 年龄: 9 },
+          { 日期: "1-24", 余额: 4123, 年龄: 12 },
+          { 日期: "1-25", 余额: 3123, 年龄: 15 },
+          { 日期: "1-26", 余额: 123, 年龄: 3 },
+          { 日期: "1-27", 余额: 1223, 年龄: 6 },
+          { 日期: "1-28", 余额: 2123, 年龄: 9 },
+          { 日期: "1-29", 余额: 4123, 年龄: 12 },
+          { 日期: "1-30", 余额: 3123, 年龄: 15 }
+        ]
         }
       }
     }
@@ -71,7 +212,7 @@
 
 <script v-pre type="text/x-template" id="set-metrics-dimension">
 <template>
-  <ve-histogram :data="chartData" :settings="chartSettings"></ve-histogram>
+  <ve-mini :data="chartData" :settings="chartSettings"></ve-mini>
 </template>
 
 <script>
@@ -105,7 +246,7 @@
 
 <script v-pre type="text/x-template" id="set-double-y-axis">
 <template>
-  <ve-histogram :data="chartData" :settings="chartSettings"></ve-histogram>
+  <ve-mini :data="chartData" :settings="chartSettings"></ve-mini>
 </template>
 
 <script>
@@ -136,11 +277,11 @@
 
 #### 柱状图+折线图
 
-<vuep template="#histogram-line"></vuep>
+<vuep template="#mini-line"></vuep>
 
-<script v-pre type="text/x-template" id="histogram-line">
+<script v-pre type="text/x-template" id="mini-line">
 <template>
-  <ve-histogram :data="chartData" :settings="chartSettings"></ve-histogram>
+  <ve-mini :data="chartData" :settings="chartSettings"></ve-mini>
 </template>
 
 <script>
@@ -169,11 +310,11 @@
 
 #### 堆叠柱状图
 
-<vuep template="#histogram-stack"></vuep>
+<vuep template="#mini-stack"></vuep>
 
-<script v-pre type="text/x-template" id="histogram-stack">
+<script v-pre type="text/x-template" id="mini-stack">
 <template>
-  <ve-histogram :data="chartData" :settings="chartSettings"></ve-histogram>
+  <ve-mini :data="chartData" :settings="chartSettings"></ve-mini>
 </template>
 
 <script>
@@ -206,7 +347,7 @@
 
 <script v-pre type="text/x-template" id="show-data-default">
 <template>
-  <ve-histogram :data="chartData" :extend="extend"></ve-histogram>
+  <ve-mini :data="chartData" :extend="extend"></ve-mini>
 </template>
 
 <script>
@@ -241,7 +382,7 @@
 
 <script v-pre type="text/x-template" id="change-metrics-name">
 <template>
-  <ve-histogram :data="chartData" :settings="chartSettings"></ve-histogram>
+  <ve-mini :data="chartData" :settings="chartSettings"></ve-mini>
 </template>
 
 <script>
@@ -280,7 +421,7 @@
 
 <script v-pre type="text/x-template" id="set-value-axis">
 <template>
-  <ve-histogram :data="chartData" :settings="chartSettings"></ve-histogram>
+  <ve-mini :data="chartData" :settings="chartSettings"></ve-mini>
 </template>
 
 <script>

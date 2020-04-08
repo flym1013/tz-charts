@@ -1,10 +1,11 @@
 // import bar from "./bar";
-// import histogram from "./histogram";
+import histogram from "./histogram";
 import line from "./line";
-// import pie from "./pie";
+import pie from "./pie";
 // import ring from "./ring";
 // import waterfall from "./waterfall";
-// import funnel from "./funnel";
+import funnel from "./funnel";
+import mini from "./mini";
 // import radar from "./radar";
 // import chart from "./chart";
 // import map from "./map";
@@ -19,12 +20,13 @@ import line from "./line";
 
 export default {
   // bar,
-  // histogram,
-  line
-  // pie,
+  histogram,
+  line,
+  pie,
   // ring
   // waterfall,
-  // funnel,
+  funnel,
+  mini
   // radar,
   // chart,
   // map,

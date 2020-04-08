@@ -1,7 +1,11 @@
 import VeBar from "../bar";
 import VeLine from "../line";
+import VeHistogram from "../histogram";
+import VeFunnel from "../funnel";
+import VePie from "../pie";
+import VeMini from "../mini";
 
-const components = [VeBar, VeLine];
+const components = [VeBar, VeLine, VeHistogram, VeFunnel, VePie, VeMini];
 
 function install(Vue, _) {
   components.forEach(component => {
@@ -16,5 +20,9 @@ if (typeof window !== "undefined" && window.Vue) {
 export default {
   VeBar,
   VeLine,
+  VeHistogram,
+  VeFunnel,
+  VePie,
+  VeMini,
   install
 };

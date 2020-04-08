@@ -296,6 +296,7 @@ export default {
 
       if (this._isDestroyed) return;
       if (this.log) console.log(options);
+      console.log("555", options, setOptionOpts);
       // 将参数设置到图表
       this.echarts.setOption(options, setOptionOpts);
       this.$emit("ready", this.echarts, options, echartsLib);

@@ -6,6 +6,10 @@
 - 图表
 
   - [折线图](/line)
+  - [柱状图](/histogram)
+  - [漏斗图](/funnel)
+  - [饼图](/pie)
+  - [mini 图](/mini)
   - [条形图](/bar)
 
 - 其他

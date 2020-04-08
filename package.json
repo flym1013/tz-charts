@@ -5,8 +5,8 @@
   "main": "lib/index.js",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config ./build/webpack.config.js",
-    "build": "node build/rollup.config.js",
-    "prepublishOnly": "npm run build && lerna version",
+    "build": "node build/rollup.config.js -w",
+    "prepublishOnly": "npm run build && lerna version && npm run version",
     "test": "karma start ./test/karma.conf.js",
     "docs": "docsify serve docs",
     "deploy": "gh-pages -d docs",
