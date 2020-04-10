@@ -1,7 +1,7 @@
-// import { itemPoint } from "../../constants";
+import { itemPoints } from "../../constants.js";
 import { getFormated } from "../../utils";
 
-function getFunnelTooltip(dataType, digit) {
+function getFunnelTooltip(dataType, digit, tooltipMap) {
   return {
     extraCssText: "box-shadow:0px 4px 10px 0px rgba(0,52,113,0.1);",
     backgroundColor: "#fff",
@@ -11,17 +11,29 @@ function getFunnelTooltip(dataType, digit) {
     formatter(item) {
       let tpl = [];
       // tpl.push(itemPoint(item.color))
-      tpl.push(
-        `<span style="display:inline-block;margin-right:5px;border-radius:4px;width:6px;height:6px;background-color:${item.color}"></span>`
-      );
-      tpl.push(
-        `<span style='font-size:12px;color:rgba(153,153,153,1);font-family:MicrosoftYaHeiUI;'>${item.name}</span>`
-      );
-      tpl.push(`<span style='font-size:12px;color:rgba(48,48,48,1);font-family:MicrosoftYaHeiUI;padding-left: 5px;
-      '>${getFormated(item.value, dataType, digit)}</span>`);
-      // tpl.push(
-      //   `${item.name}: ${getFormated(item.data.realValue, dataType, digit)}`
-      // );
+      if (Object.keys(tooltipMap).length) {
+        tpl.push(itemPoints(item.color));
+        tpl.push(
+          `<span style='font-size:12px;color:rgba(153,153,153,1);font-family:MicrosoftYaHeiUI;'>${item.name}</span>`
+        );
+        Object.keys(tooltipMap).forEach(val => {
+          tpl.push("<br>");
+          tpl.push(`<span style='font-size:12px;color:rgba(48,48,48,1);font-family:MicrosoftYaHeiUI;padding-left: 10px;
+          '>${tooltipMap[val]}:${item.data.data[val]}</span>`);
+        });
+      } else {
+        tpl.push(
+          `<span style="display:inline-block;margin-right:5px;border-radius:4px;width:6px;height:6px;background-color:${item.color}"></span>`
+        );
+        tpl.push(
+          `<span style='font-size:12px;color:rgba(153,153,153,1);font-family:MicrosoftYaHeiUI;'>${item.name}</span>`
+        );
+        tpl.push(`<span style='font-size:12px;color:rgba(48,48,48,1);font-family:MicrosoftYaHeiUI;padding-left: 5px;
+        '>${getFormated(item.value, dataType, digit)}</span>`);
+        // tpl.push(
+        //   `${item.name}: ${getFormated(item.data.realValue, dataType, digit)}`
+        // );
+      }
       return tpl.join("");
     }
   };
@@ -111,7 +123,6 @@ function getFunnelSeries(args) {
   });
 
   const step = 100 / innerRows.length;
-
   if (falseFunnel && !useDefaultOrder) {
     series.data = innerRows
       .slice()
@@ -119,13 +130,15 @@ function getFunnelSeries(args) {
       .map((row, index) => ({
         name: row[dimension],
         value: (index + 1) * step,
-        realValue: row[metrics]
+        realValue: row[metrics],
+        data: row
       }));
   } else {
     series.data = innerRows.map(row => ({
       name: row[dimension],
       value: row[metrics],
-      realValue: row[metrics]
+      realValue: row[metrics],
+      data: row
     }));
   }
 
@@ -133,28 +146,25 @@ function getFunnelSeries(args) {
   if (label) series.label = label;
   if (labelLine) series.labelLine = labelLine;
   if (itemStyle) series.itemStyle = itemStyle;
-  if (dimension) {
-    let copySeries = Object.assign({}, series, {
-      labelLine: {
-        show: false
-      },
-      label: {
-        normal: {
-          show: true,
-          position: "inside",
-          textStyle: {
-            fontSize: 12
-          },
-          formatter: function(param) {
-            console.log("85214", param);
-            return param.value;
-          }
+  let copySeries = Object.assign({}, series, {
+    labelLine: {
+      show: false
+    },
+    label: {
+      normal: {
+        show: true,
+        position: "inside",
+        textStyle: {
+          fontSize: 12
+        },
+        formatter: function(param) {
+          return param.value;
         }
       }
-    });
-    console.log("1234", series, copySeries);
-  }
-  return series;
+    }
+  });
+  // console.log("1234", series, copySeries);
+  return [series, copySeries];
 }
 
 function getGrid(args) {
@@ -199,6 +209,7 @@ export const funnel = (outerColumns, outerRows, settings, extra) => {
     itemStyle,
     filterZero,
     useDefaultOrder,
+    tooltipMap = [],
     grid
   } = settings;
   const { tooltipVisible, legendVisible } = extra;
@@ -211,7 +222,8 @@ export const funnel = (outerColumns, outerRows, settings, extra) => {
     metrics = metricsTemp[0];
   }
 
-  const tooltip = tooltipVisible && getFunnelTooltip(dataType, digit);
+  const tooltip =
+    tooltipVisible && getFunnelTooltip(dataType, digit, tooltipMap);
   const legend =
     legendVisible && getFunnelLegend({ data: sequence, legendName });
   const series = getFunnelSeries({

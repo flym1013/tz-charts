@@ -25,6 +25,7 @@
           width="100%"
           height="100%"
           :settings="d.settings"
+          :extend="d.extend  || {}"
         ></component>
       </div>
     </div>

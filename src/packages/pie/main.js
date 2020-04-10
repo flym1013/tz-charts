@@ -1,5 +1,5 @@
 import {
-  // itemPoint,
+  itemPoints,
   DEFAULT_COLORS,
   DEFAULT_COLORS_10,
   DEFAULT_COLORS_20
@@ -97,7 +97,8 @@ function getPieSeries(args) {
     }
     seriesItem.data = dataRows.map(row => ({
       name: row[dimension],
-      value: row[metrics]
+      value: row[metrics],
+      data: row
     }));
     series.push(seriesItem);
   });
@@ -206,7 +207,15 @@ function getPieLegend(args) {
 }
 
 function getPieTooltip(args) {
-  const { dataType, innerRows, limitShowNum, digit, metrics, dimension } = args;
+  const {
+    dataType,
+    innerRows,
+    limitShowNum,
+    digit,
+    metrics,
+    dimension,
+    tooltipMap
+  } = args;
   // eslint-disable-next-line no-unused-vars
   let sum = 0;
   const remainArr = innerRows
@@ -227,10 +236,7 @@ function getPieTooltip(args) {
     formatter(item) {
       console.log(item);
       let tpl = [];
-      // tpl.push(itemPoint(item.color));
-      tpl.push(
-        `<span style="display:inline-block;border-radius:4px;width:6px;height:6px;background-color:${item.color}"></span>`
-      );
+      tpl.push(itemPoints(item.color));
       if (limitShowNum && item.name === "其他") {
         tpl.push(`<span style='font-size:12px;color:rgba(48,48,48,1);font-family:MicrosoftYaHeiUI;
         '>其他:</span>`);
@@ -243,14 +249,22 @@ function getPieTooltip(args) {
           '>${getFormated(item.value, dataType, digit)}</span>`);
         });
       } else {
-        // tpl.push(`${item.name}:`);
-        tpl.push(
-          `<span style='font-size:12px;color:rgba(153,153,153,1);font-family:MicrosoftYaHeiUI;'>${item.name}</span>`
-        );
-        // tpl.push(getFormated(item.value, dataType, digit));
-        tpl.push(`<span style='font-size:12px;color:rgba(48,48,48,1);font-family:MicrosoftYaHeiUI;padding-left: 5px;
-        '>${getFormated(item.value, dataType, digit)}</span>`);
-        // tpl.push(`(${item.percent}%)`);
+        if (Object.keys(tooltipMap).length) {
+          tpl.push(
+            `<span style='font-size:12px;color:rgba(153,153,153,1);font-family:MicrosoftYaHeiUI;'>${item.name}</span>`
+          );
+          Object.keys(tooltipMap).forEach(val => {
+            tpl.push("<br>");
+            tpl.push(`<span style='font-size:12px;color:rgba(48,48,48,1);font-family:MicrosoftYaHeiUI;padding-left: 10px;
+            '>${tooltipMap[val]}:${item.data.data[val]}</span>`);
+          });
+        } else {
+          tpl.push(
+            `<span style='font-size:12px;color:rgba(153,153,153,1);font-family:MicrosoftYaHeiUI;'>${item.name}</span>`
+          );
+          tpl.push(`<span style='font-size:12px;color:rgba(48,48,48,1);font-family:MicrosoftYaHeiUI;padding-left: 5px;
+          '>${getFormated(item.value, dataType, digit)}</span>`);
+        }
       }
       return tpl.join(" ");
     }
@@ -302,7 +316,8 @@ export const pie = (columns, rows, settings, extra, isRing) => {
     limitShowNum = 0,
     labelLine,
     itemStyle,
-    downPie = false
+    downPie = false,
+    tooltipMap = []
   } = settings;
   const { tooltipVisible, legendVisible } = extra;
   if (limitShowNum) innerRows.sort((a, b) => b[metrics] - a[metrics]);
@@ -345,7 +360,8 @@ export const pie = (columns, rows, settings, extra, isRing) => {
       limitShowNum,
       digit,
       metrics,
-      dimension
+      dimension,
+      tooltipMap
     });
   const title = getPieTitle();
   const options = { series, legend, tooltip, color, title };
