@@ -19,7 +19,7 @@ function getFunnelTooltip(dataType, digit, tooltipMap) {
         Object.keys(tooltipMap).forEach(val => {
           tpl.push("<br>");
           tpl.push(`<span style='font-size:12px;color:rgba(48,48,48,1);font-family:MicrosoftYaHeiUI;padding-left: 10px;
-          '>${tooltipMap[val]}:${item.data.data[val]}</span>`);
+          '>${tooltipMap[val] || val}:${item.data.data[val]}</span>`);
         });
       } else {
         tpl.push(

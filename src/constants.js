@@ -85,10 +85,9 @@ export const itemPoint = color => {
     '<span style="',
     `background-color:${color};`,
     "display: inline-block;",
-    "width: 10px;",
-    "height: 10px;",
+    "width: 6px;",
+    "height: 6px;",
     "border-radius: 50%;",
-    "margin-right:2px;",
     '"></span>'
   ].join("");
 };

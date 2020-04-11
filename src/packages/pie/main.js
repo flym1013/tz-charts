@@ -1,5 +1,5 @@
 import {
-  itemPoints,
+  itemPoint,
   DEFAULT_COLORS,
   DEFAULT_COLORS_10,
   DEFAULT_COLORS_20
@@ -234,9 +234,7 @@ function getPieTooltip(args) {
     trigger: "item",
     padding: 10,
     formatter(item) {
-      console.log(item);
       let tpl = [];
-      tpl.push(itemPoints(item.color));
       if (limitShowNum && item.name === "其他") {
         tpl.push(`<span style='font-size:12px;color:rgba(48,48,48,1);font-family:MicrosoftYaHeiUI;
         '>其他:</span>`);
@@ -250,15 +248,17 @@ function getPieTooltip(args) {
         });
       } else {
         if (Object.keys(tooltipMap).length) {
+          tpl.push(itemPoint(item.color));
           tpl.push(
             `<span style='font-size:12px;color:rgba(153,153,153,1);font-family:MicrosoftYaHeiUI;'>${item.name}</span>`
           );
           Object.keys(tooltipMap).forEach(val => {
             tpl.push("<br>");
             tpl.push(`<span style='font-size:12px;color:rgba(48,48,48,1);font-family:MicrosoftYaHeiUI;padding-left: 10px;
-            '>${tooltipMap[val]}:${item.data.data[val]}</span>`);
+            '>${tooltipMap[val] || val}:${item.data.data[val]}</span>`);
           });
         } else {
+          tpl.push(itemPoint(item.color));
           tpl.push(
             `<span style='font-size:12px;color:rgba(153,153,153,1);font-family:MicrosoftYaHeiUI;'>${item.name}</span>`
           );
