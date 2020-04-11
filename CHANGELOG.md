@@ -1,3 +1,7 @@
+## [1.1.1-alpha.0](http://git.tanzk.cn/frontend/teaching/tz-chart/compare/v1.1.0-y.1...v1.1.1-alpha.0) (2020-04-11)
+
+
+
 # [1.1.0-alpha.0](http://git.tanzk.cn/frontend/teaching/tz-chart/compare/v1.1.0-y.1...v1.1.0-alpha.0) (2020-04-11)
 
 
