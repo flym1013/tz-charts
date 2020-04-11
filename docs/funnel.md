@@ -15,6 +15,7 @@
 | label           | 设置文本标签样式                    | object  | 内容参考[文档](http://echarts.baidu.com/option.html#series-funnel.label)     |
 | labelLine       | 设置标签的视觉引导线样式            | object  | 内容参考[文档](http://echarts.baidu.com/option.html#series-funnel.labelLine) |
 | itemStyle       | 设置图形样式                        | object  | 内容参考[文档](http://echarts.baidu.com/option.html#series-funnel.itemStyle) |
+| tooltipMap      | 自定义悬浮提示的字段                | object  | -                                                                            |
 
 #### 示例
 
@@ -68,6 +69,37 @@
             { '状态': '访问', '状态1': '访问1', '数值': 600 },
             { '状态': '点击', '状态1': '点击1', '数值': 300 },
             { '状态': '订单', '状态1': '订单1', '数值': 100 }
+          ]
+        }
+      }
+    }
+  }
+</script>
+</script>
+
+#### 自定义悬浮显示字段
+
+<vuep template="#custom-tooltip-funnel"></vuep>
+
+<script v-pre type="text/x-template" id="custom-tooltip-funnel">
+<template>
+  <ve-funnel :data="chartData" :settings="chartSettings"></ve-funnel>
+</template>
+
+<script>
+  export default {
+    data () {
+      this.chartSettings = {
+        tooltipMap: { status: "我的状态", status1: "我的状态1" }
+      }
+      return {
+        chartData: {
+          columns: ['状态', 'status', 'status1'],
+          rows: [
+            { '状态': '展示', 'status': '410', 'status1': 900 },
+            { '状态': '访问', 'status': '541', 'status1': 600 },
+            { '状态': '点击', 'status': '5645', 'status1': 300 },
+            { '状态': '订单', 'status': '456', 'status1': 100 }
           ]
         }
       }

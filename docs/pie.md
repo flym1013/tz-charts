@@ -19,6 +19,7 @@
 | itemStyle      | 图形样式                              | object  | 内容参考[文档](http://echarts.baidu.com/option.html#series-pie.itemStyle)                           |
 | level          | 多圆饼图时设置                        | array   | -                                                                                                   |
 | limitShowNum   | 设置超过此数字时使用‘其他’代替        | number  | 此时数据会按照由大到小顺序显示                                                                      |
+| tooltipMap     | 自定义悬浮提示的字段                  | object  | -                                                                                                   |
 
 > 备注 1. level 的值接受二维数组，例如：`[['a', 'b'], ['c', 'd']]`, 表示的含义是内层展示的是维度中的`'a', 'b'`的指标加在一起组成的饼图，外层为`'c', 'd'`的指标加在一起组成的环图。
 
@@ -158,6 +159,39 @@
             { '日期': '1/4', '访问用户': 1723 },
             { '日期': '1/5', '访问用户': 3792 },
             { '日期': '1/6', '访问用户': 4593 }
+          ]
+        }
+      }
+    }
+  }
+</script>
+</script>
+
+#### 自定义悬浮显示字段
+
+<vuep template="#simple-tooltip-pie"></vuep>
+
+<script v-pre type="text/x-template" id="simple-tooltip-pie">
+<template>
+  <ve-pie :data="chartData" :settings="chartSettings"></ve-pie>
+</template>
+
+<script>
+  export default {
+    data () {
+      this.chartSettings = {
+   tooltipMap: { user: "我的用户", user1: "我的用户1" }
+      }
+      return {
+        chartData: {
+          columns: ['日期', 'user', 'user1'],
+          rows: [
+            { '日期': '1/1', 'user': 1393, 'user1': 3792 },
+            { '日期': '1/2', 'user': 3530, 'user1': 3530 },
+            { '日期': '1/3', 'user': 2923, 'user1': 1723 },
+            { '日期': '1/4', 'user': 1723, 'user1': 1393 },
+            { '日期': '1/5', 'user': 3792, 'user1': 4593 },
+            { '日期': '1/6', 'user': 4593, 'user1': 1393 }
           ]
         }
       }
