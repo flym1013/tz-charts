@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config ./build/webpack.config.js",
-    "build": "node build/rollup.config.js",
+    "build": "node build/rollup.config.js -w",
     "prepublishOnly": "npm run build && lerna version && npm run version",
     "test": "karma start ./test/karma.conf.js",
     "docs": "docsify serve docs",
