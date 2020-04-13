@@ -73,7 +73,7 @@ function getLineSeries(args) {
       } else if (nullAddZero) {
         value = 0;
       }
-      dataTemp[item].push([row[dimension[0]], value]);
+      dataTemp[item].push([row[dimension[0]], value, row]);
     });
   });
   metrics.forEach(item => {
@@ -237,7 +237,14 @@ function getLineXAxis(args) {
 }
 
 function getLineTooltip(args) {
-  const { axisSite, yAxisType, digit, labelMap, tooltipFormatter } = args;
+  const {
+    axisSite,
+    yAxisType,
+    digit,
+    labelMap,
+    tooltipFormatter,
+    tooltipMap
+  } = args;
   const rightItems = axisSite.right || [];
   const rightList = labelMap
     ? rightItems.map(item => {
@@ -281,6 +288,16 @@ function getLineTooltip(args) {
         tpl.push(`${seriesName}: ${showData}`);
         tpl.push("<br>");
       });
+      if (Object.keys(tooltipMap).length) {
+        Object.keys(tooltipMap).forEach(val => {
+          let marker = `<span style="display:inline-block;margin-right:5px;border-radius:6px;width:6px;height:6px;background-color:${items[0].color};"></span>`;
+          tpl.push(marker);
+          tpl.push(
+            `${tooltipMap[val] || val}: ${items[0].data[2][val] || "-"}`
+          );
+          tpl.push("<br>");
+        });
+      }
       return tpl.join("");
     }
   };
@@ -354,7 +371,8 @@ export const line = (columns, rows, settings, extra) => {
     lineStyle,
     areaStyle,
     grid,
-    splitNumber = 5
+    splitNumber = 5,
+    tooltipMap = []
   } = settings;
 
   function getMaxByKey(list, key) {
@@ -430,7 +448,8 @@ export const line = (columns, rows, settings, extra) => {
       digit,
       labelMap,
       xAxisType,
-      tooltipFormatter
+      tooltipFormatter,
+      tooltipMap
     });
   const xAxis = getLineXAxis({
     dimension,

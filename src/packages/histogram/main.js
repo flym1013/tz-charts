@@ -251,7 +251,7 @@ function getBarSeries(args) {
     symbolSize: 3,
     showSymbol: true,
     animation: true,
-    yAxisIndex: 1,
+    smooth: false,
     barGap: "15",
     lineStyle: {
       normal: {
@@ -322,7 +322,6 @@ function getBarSeries(args) {
 
     return seriesItem;
   });
-
   return series.length ? series : false;
 }
 
@@ -530,7 +529,14 @@ export const histogram = (columns, rows, settings, status) => {
     opacity,
     dims
   });
-  const tooltipParams = { axisSite, isHistogram, meaAxisType, digit, labelMap };
+  const tooltipParams = {
+    axisSite,
+    isHistogram,
+    meaAxisType,
+    digit,
+    labelMap,
+    innerRows
+  };
   const tooltip = tooltipVisible && getBarTooltip(tooltipParams);
   const title = getBarTitle();
   const _grid = getGrid(grid);

@@ -19,6 +19,7 @@
 | labelMap    | 设置指标的别名，同时作用于提示框和图例                        | object  | -                                                                                                                 |
 | legendName  | 设置图表上方图例的别名                                        | object  | - -                                                                                                               |
 | splitNumber | 设置左右坐标轴的分段数量，设置了 axisSite 在 right 轴时才生效 | number  | 默认值为 5                                                                                                        |  |
+| tooltipMap  | 添加额外的悬浮提示的字段                                      | object  |
 
 > 备注 1. axisSite 可以设置 left 和 right，例如示例所示 `axisSite: { right: ['占比'] }` 即将占比的数据置于右轴上。
 
@@ -75,6 +76,39 @@
       return {
         chartData: {
           columns: ['日期', '访问用户', '下单用户', '下单率'],
+          rows: [
+            { '日期': '1/1', '访问用户': 1393, '下单用户': 1093, '下单率': 0.32 },
+            { '日期': '1/2', '访问用户': 3530, '下单用户': 3230, '下单率': 0.26 },
+            { '日期': '1/3', '访问用户': 2923, '下单用户': 2623, '下单率': 0.76 },
+            { '日期': '1/4', '访问用户': 1723, '下单用户': 1423, '下单率': 0.49 },
+            { '日期': '1/5', '访问用户': 3792, '下单用户': 3492, '下单率': 0.323 },
+            { '日期': '1/6', '访问用户': 4593, '下单用户': 4293, '下单率': 0.78 }
+          ]
+        }
+      }
+    }
+  }
+</script>
+</script>
+
+#### 添加额外的 tooltip 自定义字段
+
+<vuep template="#set-tooltip-dimension"></vuep>
+
+<script v-pre type="text/x-template" id="set-tooltip-dimension">
+<template>
+  <ve-line :data="chartData" :settings="chartSettings"></ve-line>
+</template>
+
+<script>
+  export default {
+    data () {
+      this.chartSettings = {
+       tooltipMap: { 下单率: "我的下单率" }
+      }
+      return {
+        chartData: {
+          columns: ['日期', '访问用户', '下单用户'],
           rows: [
             { '日期': '1/1', '访问用户': 1393, '下单用户': 1093, '下单率': 0.32 },
             { '日期': '1/2', '访问用户': 3530, '下单用户': 3230, '下单率': 0.26 },
