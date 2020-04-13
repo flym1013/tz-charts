@@ -251,6 +251,7 @@ function getBarSeries(args) {
     symbolSize: 3,
     showSymbol: true,
     animation: true,
+    smooth: false,
     barGap: "15",
     lineStyle: {
       normal: {
