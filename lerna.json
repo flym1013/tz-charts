@@ -1,10 +1,15 @@
 {
   "command": {
     "publish": {
-      "ignoreChanges": ["ignored-file", "*.md"],
+      "ignoreChanges": [
+        "ignored-file",
+        "*.md"
+      ],
       "registry": "http://nexus.tanzk.com:8081/repository/tzedu-npm-releases/"
     }
   },
-  "packages": ["./"],
-  "version": "1.0.0-beta.2"
+  "packages": [
+    "./"
+  ],
+  "version": "1.0.0-beta.3"
 }
