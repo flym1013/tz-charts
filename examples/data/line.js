@@ -122,8 +122,10 @@ export default {
       settings: {
         labelMap: {
           date: "日期",
-          balance: "余额"
-        }
+          balance: "余额",
+          age: "年龄"
+        },
+        axisSite: { right: ["年龄"] }
       }
     },
     {
