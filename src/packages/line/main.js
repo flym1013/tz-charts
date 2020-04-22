@@ -79,6 +79,7 @@ function getLineSeries(args) {
   metrics.forEach(item => {
     let seriesItem = {
       name: labelMap[item] != null ? labelMap[item] : item,
+      realName: item,
       type: "line",
       data: dataTemp[item]
     };
@@ -94,7 +95,7 @@ function getLineSeries(args) {
 
     if (axisSite.right) {
       seriesItem.yAxisIndex =
-        axisSite.right.indexOf(seriesItem.name) >= 0 ? 1 : 0;
+        axisSite.right.indexOf(seriesItem.realName) >= 0 ? 1 : 0;
     }
 
     if (stack && stackMap[item]) seriesItem.stack = stackMap[item];
@@ -406,25 +407,14 @@ export const line = (columns, rows, settings, extra) => {
   });
 
   let max2 = 0;
+  console.log(rightKeyList);
   rightKeyList.forEach(item => {
-    let objKeyList = Object.keys(labelMap);
-    let max;
-    if (objKeyList.length) {
-      objKeyList.forEach(n => {
-        if (labelMap[n] === item) {
-          max = getMaxByKey(rows, n);
-        } else {
-          max = getMaxByKey(rows, item);
-        }
-      });
-    } else {
-      max = getMaxByKey(rows, item);
-    }
+    let max = getMaxByKey(rows, item);
     if (max2 < max) {
       max2 = max;
     }
   });
-
+  console.log(max1, max2);
   let min1 = 0;
   let min2 = 0;
 
