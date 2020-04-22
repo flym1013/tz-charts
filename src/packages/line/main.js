@@ -407,7 +407,19 @@ export const line = (columns, rows, settings, extra) => {
 
   let max2 = 0;
   rightKeyList.forEach(item => {
-    let max = getMaxByKey(rows, item);
+    let objKeyList = Object.keys(labelMap);
+    let max;
+    if (objKeyList.length) {
+      objKeyList.forEach(n => {
+        if (labelMap[n] === item) {
+          max = getMaxByKey(rows, n);
+        } else {
+          max = getMaxByKey(rows, item);
+        }
+      });
+    } else {
+      max = getMaxByKey(rows, item);
+    }
     if (max2 < max) {
       max2 = max;
     }
