@@ -1,5 +1,5 @@
 import { itemPoints } from "../../constants.js";
-import { getFormated } from "../../utils";
+import { getFormated } from "../../utils.js";
 
 function getFunnelTooltip(dataType, digit, tooltipMap) {
   return {
