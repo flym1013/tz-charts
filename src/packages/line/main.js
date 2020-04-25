@@ -407,14 +407,12 @@ export const line = (columns, rows, settings, extra) => {
   });
 
   let max2 = 0;
-  console.log(rightKeyList);
   rightKeyList.forEach(item => {
     let max = getMaxByKey(rows, item);
     if (max2 < max) {
       max2 = max;
     }
   });
-  console.log(max1, max2);
   let min1 = 0;
   let min2 = 0;
 
