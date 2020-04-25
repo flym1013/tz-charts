@@ -1,3 +1,7 @@
+# [1.0.0-beta.5](http://git.tanzk.cn/frontend/teaching/tz-chart/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2020-04-25)
+
+
+
 # [1.0.0-beta.5](http://git.tanzk.cn/frontend/teaching/tz-chart/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2020-04-23)
 
 # [1.0.0-beta.4](http://git.tanzk.cn/frontend/teaching/tz-chart/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2020-04-22)

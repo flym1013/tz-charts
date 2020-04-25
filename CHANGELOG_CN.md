@@ -1,3 +1,7 @@
+# [1.0.0-beta.5](http://git.tanzk.cn/frontend/teaching/tz-chart/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2020-04-25)
+
+
+
 # [1.0.0-beta.4](http://git.tanzk.cn/frontend/teaching/tz-chart/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2020-04-22)
 
 # [1.1.0-alpha.1](https://github.com/ElemeFE/v-charts/compare/v1.1.0-alpha.0...v1.1.0-alpha.1) (2020-03-30)
