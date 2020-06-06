@@ -26,7 +26,7 @@
 </p>
 
 <p align="center">
-  <a href="https://v-charts.js.org">
+  <a href="http://frontend.tanzk.cn/teaching/tz-chart/#/">
     文档
   </a>
   <span> | </span>
